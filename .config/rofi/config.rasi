@@ -1,0 +1,90 @@
+configuration {
+    modi: "drun,recursivebrowser";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: "Applications 󰣆 :";
+    drun-display-format: "{icon}{name}";
+    display-recursivebrowser: "File 󰈔 :";
+    kb-accept-custom: "";
+    kb-accept-entry: "Return";
+}
+
+@theme "/dev/null"
+
+* {
+    bg: #111111;
+    bg-alt: #111111;
+    fg: #999999;
+    fg-alt: #444444;
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+message { enabled: false; }
+error-message { enabled: false; }
+
+window {
+    width: 25%;
+    border-radius: 20;
+    background-color: transparent;
+}
+
+mainbox {
+    background-color: @bg;
+    children: [inputbar, listview];
+    border-radius: 20;
+    border: 2;
+    border-color: #4D4D4D;
+}
+
+inputbar { children: [prompt, entry]; }
+
+prompt {
+    background-color: @bg-alt;
+    enabled: true;
+    padding: 12 0 0 12;
+    text-color: @fg;
+}
+
+entry {
+    background-color: @bg-alt;
+    padding: 14;
+    text-color: @fg;
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 4;
+}
+
+element {
+    padding: 14;
+    text-color: @fg-alt;
+}
+
+element selected {
+    text-color: @fg;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    size: 50;
+    background-color: inherit;
+}
+
+filebrowser {
+    recursive: true;
+    directories-first: false;
+    sorting-method: "name";
+    path: "~";
+    show-hidden: true;
+}
