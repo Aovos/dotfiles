@@ -1,0 +1,21 @@
+{
+	"autoclose": true,		// Schließt Klammern automatisch
+	"autoindent": true,		// Übernimmt Einrückung der Vorzeile
+	"basename": true,		// Nur Dateiname in Statusleiste zeigen
+	"clipboard": "external",	// System-Zwischenablage nutzen
+	"colorscheme": "color",		// Farbschema festlegen
+	"cursor_shape": "beam",		// Cursor als Strich
+	"divchars": "|",		// Zeichen für Fenstertrennung
+	"ignorecase": true,		// Suche ignoriert Groß/Klein
+	"matchbrace": true,		// Hebt Klammerpaare hervor
+	"mkparents": true,		// Erstellt Pfade beim Speichern
+	"mouse": true,			// Maus-Support aktivieren
+	"rmtrailingws": true,		// Leerzeichen am Ende entfernen
+	"ruler": true,			// Zeilennummern permanent anzeigen
+	"scrollbar": false,		// Scrollbalken ausblenden
+	"statusline": true,		// Statuszeile anzeigen
+	"syntax": true,			// Aktiviert die Syntax-Hervorhebung
+	"tabbar": true,			// Reiter für mehrere Dateien oben
+	"tabsize": 4,			// Tab-Breite auf 4
+	"tabstospaces": true		// Tabs in Leerzeichen wandelnr
+}
