@@ -1,0 +1,67 @@
+theme = "term16_dark"
+
+[editor]
+mouse = true
+#line-number = "relative"
+
+[editor.statusline]
+left = [
+  "mode",
+  "separator",
+  "file-name",
+  "file-modification-indicator"
+]
+
+center = [
+  "version-control"
+]
+
+right = [
+  "file-type",
+  "file-encoding",
+  "position",
+  "position-percentage",
+  "total-line-numbers"
+]
+
+[editor.soft-wrap]
+enable = true
+# Zeigt am Ende der umgebrochenen Zeile ein Zeichen an (z. B. einen Pfeil)
+wrap-indicator = "↪ "
+# Bricht Zeilen nur an Wortgrenzen (z. B. Leerzeichen) um, statt mitten im Wort
+wrap-at-text-width = false
+
+[keys.normal]
+C-a = "select_all"
+C-s = ":write"
+
+C-z = "undo"
+C-S-z = "redo"
+
+C-A-l = ":format"
+
+y = "yank_to_clipboard"
+p = "paste_clipboard_after"
+P = "paste_clipboard_before"
+
+S-left = "extend_char_left"
+S-right = "extend_char_right"
+S-up = "extend_line_up"
+S-down = "extend_line_down"
+
+[keys.select]
+y = "yank_to_clipboard"
+C-c = "yank_to_clipboard"
+p = "replace_selections_with_clipboard"
+
+[keys.insert]
+C-a = ["normal_mode", "select_all"]
+C-s = ["normal_mode", ":write", "insert_mode"]
+
+C-z = ["normal_mode", "undo", "insert_mode"]
+C-S-z = ["normal_mode", "redo", "insert_mode"]
+
+S-left = "extend_char_left"
+S-right = "extend_char_right"
+S-up = "extend_line_up"
+S-down = "extend_line_down"
