@@ -4,7 +4,7 @@
   ####################################################################
   # Imports
   ####################################################################
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
   ];
 
@@ -32,15 +32,11 @@
   # Bootvorgang beschleunigen (wartet nicht auf Netzwerk)
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # NVIDIA-Karte komplett physisch abschalten für maximale Akkulaufzeit (Option A)
-  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
-  boot.kernelParams = [ "nouveau.modeset=0" ];
-
   ####################################################################
   # Netzwerk
   ####################################################################
   networking = {
-    hostName = "sLaptop"; 
+    hostName = "sLaptop";
     networkmanager.enable = true;
     firewall.enable = true;
   };
@@ -65,7 +61,7 @@
 
   console = {
     keyMap = "de";
-    font = "Lat2-Terminus16"; 
+    font = "Lat2-Terminus16";
   };
 
   services.xserver.xkb = {
@@ -106,7 +102,7 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-    nssmdns6 = true; 
+    nssmdns6 = true;
     openFirewall = true;
   };
 
@@ -114,8 +110,8 @@
   services.fstrim.enable = true;
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
-  services.gvfs.enable = true;   
-  services.udisks2.enable = true; 
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   # Laptop-Deckelverhalten: Weiterlaufen lassen beim Zuklappen
   services.logind.settings.Login = {
@@ -127,38 +123,54 @@
   ####################################################################
   # GPU - NVIDIA (ZUKÜNFTIGES SETUP / AKTUELL ÜBER BLACKLIST DEAKTIVIERT)
   ####################################################################
-  # services.xserver.videoDrivers = ["nvidia" "intel"];
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
-  #   open = false;
-  #   nvidiaSettings = true;
-  #   powerManagement.enable = true;
-  #   powerManagement.finegrained = true;
-  #   prime = {
-  #     offload = {
-  #       enable = true;
-  #       enableOffloadCmd = true;
-  #     };
-  #     intelBusId = "PCI:0:2:0";
-  #     nvidiaBusId = "PCI:1:0:0";
-  #   };
-  # };
+  # 1. Grafiktreiber für NVIDIA und Intel aktivieren
+  services.xserver.videoDrivers = [ "nvidia" ];
 
+  # 2. Intel Hardware-Beschleunigung (Hält die CPU beim Videoschauen kühl)
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # Haupttreiber für Ihre Intel UHD 630 (Coffee Lake)
+      vaapiIntel         # Zuverlässiger Fallback-Treiber
+    ];
+  };
+
+  # 3. NVIDIA Prime Offload (Tiefschlaf-Modus für minimalen Verbrauch)
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;           # Erforderlich für stabilen Stromsparmodus der GTX 1660 Ti
+    nvidiaSettings = false; # Spart Ressourcen (deaktiviert das Nvidia-Kontrollzentrum im Hintergrund)
+    
+    # Aktiviert die dynamische Energieverwaltung (D3hot/D3cold)
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true; # Aktiviert den Befehl 'nvidia-offload' im Terminal
+      };
+      
+      # Ihre verifizierten PCI-Bus-IDs
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
   ####################################################################
   # Sicherheit & Rechteverwaltung
   ####################################################################
   security = {
     sudo.enable = true;
-    polkit.enable = true; 
-    rtkit.enable = true;  
+    polkit.enable = true;
+    rtkit.enable = true;
   };
 
   ####################################################################
   # Benutzer
   ####################################################################
-  users.users."USERNAME_HERE" = {
+  users.users."soto" = {
     isNormalUser = true;
-    description = "USERNAME_HERE";
+    description = "soto";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
@@ -167,7 +179,7 @@
   ####################################################################
   programs.hyprland = {
     enable = true;
-    withUWSM = true; 
+    withUWSM = true;
   };
   programs.uwsm.enable = true;
 
@@ -241,7 +253,7 @@
   # Umgebungsvariablen
   ####################################################################
   environment.variables = {
-    NIXOS_OZONE_WL = "1"; 
+    NIXOS_OZONE_WL = "1";
     GTK_THEME = "Colloid-Dark";
     EDITOR = "micro";
     VISUAL = "micro";
@@ -310,7 +322,7 @@
     shotcut
 
     # 🎨 Themes & Styling
-    nwg-look 
+    nwg-look
     gtk3
     gtk-layer-shell
     papirus-icon-theme
