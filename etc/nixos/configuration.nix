@@ -82,12 +82,6 @@
   };
   services.blueman.enable = true;
 
-  # Basis-Grafikstack aktivieren (Intel)
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   # Pipewire Audio-Setup mit Echtzeit-Priorität und 32-Bit Support
   services.pipewire = {
     enable = true;
@@ -121,17 +115,18 @@
   };
 
   ####################################################################
-  # GPU - NVIDIA (ZUKÜNFTIGES SETUP / AKTUELL ÜBER BLACKLIST DEAKTIVIERT)
+  # GPU - NVIDIA & INTEL HYBRID-SETUP (Fehler bereinigt)
   ####################################################################
   # 1. Grafiktreiber für NVIDIA und Intel aktivieren
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # 2. Intel Hardware-Beschleunigung (Hält die CPU beim Videoschauen kühl)
+  # 2. Hardware-Beschleunigung für Intel (UHD 630) und 32-Bit Support
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
-      intel-media-driver # Haupttreiber für Ihre Intel UHD 630 (Coffee Lake)
-      vaapiIntel         # Zuverlässiger Fallback-Treiber
+      intel-media-driver   # Moderner Haupttreiber für Video-Dekodierung (Akkuschonung)
+      intel-vaapi-driver   # Klassischer Ersatztreiber (Fallback) für ältere Programme
     ];
   };
 
@@ -140,7 +135,7 @@
     modesetting.enable = true;
     open = false;           # Erforderlich für stabilen Stromsparmodus der GTX 1660 Ti
     nvidiaSettings = false; # Spart Ressourcen (deaktiviert das Nvidia-Kontrollzentrum im Hintergrund)
-    
+
     # Aktiviert die dynamische Energieverwaltung (D3hot/D3cold)
     powerManagement.enable = true;
     powerManagement.finegrained = true;
@@ -150,12 +145,13 @@
         enable = true;
         enableOffloadCmd = true; # Aktiviert den Befehl 'nvidia-offload' im Terminal
       };
-      
+
       # Ihre verifizierten PCI-Bus-IDs
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
   };
+
   ####################################################################
   # Sicherheit & Rechteverwaltung
   ####################################################################
@@ -299,6 +295,7 @@
     tmux
     fzf
     curl
+    glow
 
     # 🖼️ Grafik & Design
     inkscape
