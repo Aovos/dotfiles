@@ -4,57 +4,53 @@
   ####################################################################
   # Imports
   ####################################################################
-
-  imports = [
+  imports = [ 
     ./hardware-configuration.nix
   ];
 
   ####################################################################
-  # Nix
+  # Systemversion & Update-Einstellungen
   ####################################################################
+  system.stateVersion = "25.11";
 
-  nix.settings = {
-    auto-optimise-store = true;                           # Nix-Store automatisch optimieren
-    experimental-features = [ "nix-command" "flakes" ];  # Flakes und neue Nix CLI
-  };
-
+  # Nix-Einstellungen (Platz sparen & Aufräumen)
+  nix.settings.auto-optimise-store = true;
   nix.gc = {
-    automatic = true;                                    # Garbage Collection aktivieren
-    dates = "weekly";                                    # Wöchentlich ausführen
-    options = "--delete-older-than 14d";                 # Ältere Generationen entfernen
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 20d";
   };
 
-  nixpkgs.config.allowUnfree = true;                     # Proprietäre Software erlauben
+  nixpkgs.config.allowUnfree = true; # Proprietäre Software erlauben
 
   ####################################################################
-  # Boot
+  # Bootloader & Systemd
   ####################################################################
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.loader.systemd-boot.enable = true;                # Systemd-Bootloader
-  boot.loader.efi.canTouchEfiVariables = true;           # EFI-Einträge verwalten
+  # Bootvorgang beschleunigen (wartet nicht auf Netzwerk)
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  # NVIDIA-Karte komplett physisch abschalten für maximale Akkulaufzeit (Option A)
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
+  boot.kernelParams = [ "nouveau.modeset=0" ];
 
   ####################################################################
   # Netzwerk
   ####################################################################
-
   networking = {
-    hostName = "nixos";                                  # Rechnername
-
-    networkmanager.enable = true;                        # WLAN- und LAN-Verwaltung
-
-    firewall.enable = true;                              # Firewall aktivieren
+    hostName = "sLaptop"; 
+    networkmanager.enable = true;
+    firewall.enable = true;
   };
 
-  systemd.services.NetworkManager-wait-online.enable = false; # Bootvorgang beschleunigen
-
   ####################################################################
-  # Zeit & Sprache
+  # Zeit, Sprache & Konsolen-Layout
   ####################################################################
+  time.timeZone = "Europe/Berlin";
 
-  time.timeZone = "Europe/Berlin";                       # Zeitzone
-
-  i18n.defaultLocale = "en_US.UTF-8";                   # Standardsprache
-
+  i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
     LC_IDENTIFICATION = "de_DE.UTF-8";
@@ -68,202 +64,149 @@
   };
 
   console = {
-    keyMap = "de";                                       # Deutsches Tastaturlayout (TTY)
-    font = "Lat2-Terminus16";                            # Konsolenschriftart
+    keyMap = "de";
+    font = "Lat2-Terminus16"; 
   };
 
   services.xserver.xkb = {
-    layout = "de";                                       # Deutsches Tastaturlayout
+    layout = "de";
     variant = "";
   };
 
   ####################################################################
-  # Hardware
+  # Hardware & Services (Bluetooth, Audio, Drucker, SSD)
   ####################################################################
+  hardware.enableAllFirmware = true;
 
-  hardware.enableAllFirmware = true;                     # Zusätzliche Firmware laden
-
+  # Bluetooth mit experimentellen Funktionen aktivieren
   hardware.bluetooth = {
-    enable = true;                                       # Bluetooth aktivieren
-    powerOnBoot = true;                                  # Bluetooth beim Start einschalten
-
-    settings = {
-      General = {
-        Experimental = true;                             # Erweiterte Bluetooth-Funktionen
-      };
-    };
+    enable = true;
+    powerOnBoot = true;
+    settings.General.Experimental = true;
   };
+  services.blueman.enable = true;
 
+  # Basis-Grafikstack aktivieren (Intel)
   hardware.graphics = {
-    enable = true;                                       # Grafikstack aktivieren
-    enable32Bit = true;                                  # 32-Bit Grafikbibliotheken
+    enable = true;
+    enable32Bit = true;
   };
 
-  ####################################################################
-  # Benutzer
-  ####################################################################
-
-  users.users."USERNAME_HERE" = {
-    isNormalUser = true;                                 # Normaler Benutzer
-    description = "USERNAME_HERE";
-
-    extraGroups = [
-      "networkmanager"                                   # Netzwerkverwaltung
-      "wheel"                                            # sudo-Rechte
-      "libvirtd"                                         # Virtualisierung
-    ];
-  };
-
-  ####################################################################
-  # Sicherheit
-  ####################################################################
-
-  security = {
-    sudo.enable = true;                                  # sudo aktivieren
-    polkit.enable = true;                                # Rechteverwaltung für GUI-Anwendungen
-    rtkit.enable = true;                                 # Echtzeitprioritäten für Audio
-  };
-
-  ####################################################################
-  # Services
-  ####################################################################
-
-  services.displayManager.gdm.enable = true;             # GNOME Display Manager
-
+  # Pipewire Audio-Setup mit Echtzeit-Priorität und 32-Bit Support
   services.pipewire = {
-    enable = true;                                       # PipeWire aktivieren
-    audio.enable = true;                                 # Audio-Unterstützung
-    pulse.enable = true;                                 # PulseAudio-Kompatibilität
-    alsa.enable = true;                                  # ALSA-Unterstützung
-    alsa.support32Bit = true;                            # 32-Bit Audio-Unterstützung
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
   };
 
-  services.printing.enable = true;                       # Drucker-Unterstützung
-
+  # Drucker-Unterstützung mit Avahi (IPv4 & IPv6 Support)
+  services.printing.enable = true;
   services.avahi = {
-    enable = true;                                       # mDNS / Bonjour
-    nssmdns4 = true;                                     # IPv4 Namensauflösung
-    nssmdns6 = true;                                     # IPv6 Namensauflösung
-    openFirewall = true;                                 # Firewall-Regeln öffnen
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true; 
+    openFirewall = true;
   };
 
-  services.blueman.enable = true;                        # Bluetooth-Verwaltung
+  # Hardware-Dienste für Laptops (Akkuschonung & SSD-Pflege)
+  services.fstrim.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+  services.gvfs.enable = true;   
+  services.udisks2.enable = true; 
 
-  services.gvfs.enable = true;                           # Netzwerk- und USB-Mounts
-
-  services.udisks2.enable = true;                        # Laufwerksverwaltung
-
-  services.upower.enable = true;                         # Akkuinformationen bereitstellen
-
-  services.fstrim.enable = true;                         # SSD-Trim
-
-  services.power-profiles-daemon.enable = true;          # Energieprofile
-
+  # Laptop-Deckelverhalten: Weiterlaufen lassen beim Zuklappen
   services.logind.settings.Login = {
-    HandleLidSwitch = "ignore";                          # Deckel schließen ignorieren
+    HandleLidSwitch = "ignore";
     HandleLidSwitchExternalPower = "ignore";
     HandleLidSwitchDocked = "ignore";
   };
 
   ####################################################################
-  # Virtualisierung
+  # GPU - NVIDIA (ZUKÜNFTIGES SETUP / AKTUELL ÜBER BLACKLIST DEAKTIVIERT)
   ####################################################################
-
-  programs.virt-manager.enable = true;                   # Virt-Manager
-
-  virtualisation.libvirtd.enable = true;                 # Libvirt-Dienst
+  # services.xserver.videoDrivers = ["nvidia" "intel"];
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   open = false;
+  #   nvidiaSettings = true;
+  #   powerManagement.enable = true;
+  #   powerManagement.finegrained = true;
+  #   prime = {
+  #     offload = {
+  #       enable = true;
+  #       enableOffloadCmd = true;
+  #     };
+  #     intelBusId = "PCI:0:2:0";
+  #     nvidiaBusId = "PCI:1:0:0";
+  #   };
+  # };
 
   ####################################################################
-  # Desktop
+  # Sicherheit & Rechteverwaltung
   ####################################################################
+  security = {
+    sudo.enable = true;
+    polkit.enable = true; 
+    rtkit.enable = true;  
+  };
 
+  ####################################################################
+  # Benutzer
+  ####################################################################
+  users.users."USERNAME_HERE" = {
+    isNormalUser = true;
+    description = "USERNAME_HERE";
+    extraGroups = [ "networkmanager" "wheel" ];
+  };
+
+  ####################################################################
+  # Desktop Environment & Session Manager (Hyprland + Greetd)
+  ####################################################################
   programs.hyprland = {
-    enable = true;                                       # Hyprland aktivieren
-    withUWSM = true;                                     # UWSM Integration
+    enable = true;
+    withUWSM = true; 
+  };
+  programs.uwsm.enable = true;
+
+  # Greetd: Fragt immer nach User + Passwort und startet danach sofort Hyprland
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd '${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop'";
+        user = "greeter";
+      };
+    };
   };
 
-  programs.uwsm.enable = true;                           # Universal Wayland Session Manager
-
-  ####################################################################
-  # Systemprogramme
-  ####################################################################
-
-  programs.dconf.enable = true;                          # GNOME Einstellungen
-
-  programs.nano.enable = false;                          # Nano deaktivieren
-
-  ####################################################################
-  # XDG
-  ####################################################################
-
+  # XDG Portale (Sauber aufgeteilt, Hyprland-Portal kommt automatisch)
   xdg.portal = {
-    enable = true;                                       # Desktop-Portale
-
-    config.common.default = [
-      "hyprland"
-      "gtk"
-    ];
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland                        # Hyprland-Portal
-      xdg-desktop-portal-gtk                             # GTK-Portal
-    ];
+    enable = true;
+    config.common.default = [ "hyprland" "gtk" ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
+  # Standardterminal festlegen
   xdg.terminal-exec = {
-    enable = true;                                       # Standardterminal definieren
-
-    settings.default = [
-      "alacritty.desktop"
-    ];
+    enable = true;
+    settings.default = [ "alacritty.desktop" ];
   };
 
-  ####################################################################
-  # Qt
-  ####################################################################
+  programs.nano.enable = false; # Nano deaktivieren
 
+  ####################################################################
+  # Styling & Themes (GTK & Qt)
+  ####################################################################
   qt = {
-    enable = true;                                       # Qt-Theming aktivieren
-    platformTheme = "gtk2";                              # GTK-Integration für Qt
-    style = "gtk2";                                      # GTK-Optik übernehmen
+    enable = true;
+    platformTheme = "gtk2";
+    style = "gtk2";
   };
 
-  ####################################################################
-  # Umgebung
-  ####################################################################
-
-  environment.variables = {
-    NIXOS_OZONE_WL = "1";                                # Electron-Anwendungen unter Wayland
-
-    GTK_THEME = "Colloid-Dark";                          # GTK Theme
-
-    EDITOR = "micro";                                    # Standardeditor
-    VISUAL = "micro";                                    # GUI Editor
-    SUDO_EDITOR = "micro";                               # Editor für sudoedit
-  };
-
-  environment.etc."xdg/gtk-3.0/settings.ini".text = ''
-    [Settings]
-    gtk-theme-name=Colloid-Dark
-    gtk-icon-theme-name=Papirus-Dark
-    gtk-application-prefer-dark-theme=1
-    gtk-cursor-theme-name=McMojave-cursors
-    gtk-cursor-theme-size=24
-  '';
-
-  environment.etc."xdg/user-dirs.defaults".text = ''
-    DESKTOP=Desktop
-    DOWNLOAD=Downloads
-    DOCUMENTS=Documents
-    MUSIC=Music
-    PICTURES=Pictures
-    VIDEOS=Videos
-  '';
-
-  ####################################################################
-  # Dconf
-  ####################################################################
-
+  programs.dconf.enable = true;
   programs.dconf.profiles.user.databases = [{
     settings = {
       "org/gnome/desktop/interface" = {
@@ -275,19 +218,53 @@
     };
   }];
 
-  ####################################################################
-  # Pakete
-  ####################################################################
+  environment.etc."xdg/gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-theme-name=Colloid-Dark
+    gtk-icon-theme-name=Papirus-Dark
+    gtk-application-prefer-dark-theme=1
+    gtk-cursor-theme-name=McMojave-cursors
+    gtk-cursor-theme-size=24
+  '';
 
+  environment.etc."xdg/user-dirs.defaults".text = ''
+    [Settings]
+    DESKTOP=Desktop
+    DOWNLOAD=Downloads
+    DOCUMENTS=Documents
+    MUSIC=Music
+    PICTURES=Pictures
+    VIDEOS=Videos
+  '';
+
+  ####################################################################
+  # Umgebungsvariablen
+  ####################################################################
+  environment.variables = {
+    NIXOS_OZONE_WL = "1"; 
+    GTK_THEME = "Colloid-Dark";
+    EDITOR = "micro";
+    VISUAL = "micro";
+    SUDO_EDITOR = "micro";
+  };
+
+  ####################################################################
+  # Schriftarten
+  ####################################################################
+  fonts.packages = with pkgs; [
+    nerd-fonts.hack
+  ];
+
+  ####################################################################
+  # Systemweite Software-Pakete
+  ####################################################################
   environment.systemPackages = with pkgs; [
-
     # 🌐 Internet & Kommunikation
     firefox
     chromium
     freetube
     thunderbird
     signal-desktop
-    teams-for-linux
 
     # 🧠 Produktivität & Wissen
     super-productivity
@@ -297,20 +274,16 @@
 
     # 🧾 Office & Dokumente
     libreoffice
-    evince
-    pdfmixtool
     pdfarranger
     xournalpp
 
     # 💻 Editoren & Entwicklung
-    jetbrains.rider
     helix
     micro
     alacritty
 
     # 🛠️ Terminal & CLI
     git
-    lazygit
     tmux
     fzf
     curl
@@ -318,6 +291,7 @@
     # 🖼️ Grafik & Design
     inkscape
     gimp
+    feh
 
     # 📸 Screenshots
     grim
@@ -328,35 +302,36 @@
     pavucontrol
     spotify
     songrec
+    tenacity
 
     # 🎬 Medien
     mpv
     obs-studio
+    shotcut
 
     # 🎨 Themes & Styling
+    nwg-look 
     gtk3
     gtk-layer-shell
     papirus-icon-theme
-
     (colloid-gtk-theme.override {
       tweaks = [ "black" ];
       colorVariants = [ "dark" ];
     })
 
-    # 🧊 Hyprland
+    # 🧊 Hyprland Core Tools
     hyprpaper
     hyprlock
     hypridle
 
-    # 🖥️ Desktop
+    # 🖥️ Desktop UI
     rofi
     dunst
 
-    # 📁 Dateien
+    # 📁 Dateimanagement (Beide behalten für maximale Features!)
     nemo
     nautilus
     file-roller
-    xdg-user-dirs
 
     # 📊 Systemmonitoring
     mission-center
@@ -364,31 +339,12 @@
     brightnessctl
     playerctl
 
-    # 🎨 Einstellungen
+    # 🎨 Einstellungen & Backend
     dconf-editor
     font-manager
-
-    # 🔌 Desktop-Backend
-    glib
-    dconf
-    gsettings-desktop-schemas
     wl-clipboard
 
-    # 🌐 Netzwerk
+    # 🌐 Netzwerk-Helfer
     rofi-network-manager
   ];
-
-  ####################################################################
-  # Schriftarten
-  ####################################################################
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.hack                                    # Hack Nerd Font
-  ];
-
-  ####################################################################
-  # Systemversion
-  ####################################################################
-
-  system.stateVersion = "25.11";                       # Ursprüngliche NixOS-Version
 }
