@@ -5,7 +5,7 @@
   # Imports
   ####################################################################
   imports = [
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
   ];
 
   ####################################################################
@@ -311,6 +311,7 @@
     tmux
     fzf
     curl
+    lazygit
 
     # 🖼️ Grafik & Design
     inkscape
