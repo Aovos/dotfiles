@@ -22,20 +22,49 @@ wk.add({
   { "<leader>gb", "<cmd>Gitsigns blame<cr>",        desc = "Blame" },
   { "<leader>gd", "<cmd>Gitsigns diffthis<cr>",      desc = "Diff" },
   
-  -- Neue Shortcuts direkt unter Git
-  { "<leader>gp", "<cmd>!git push<cr>",             desc = "Push to GitHub" },
+  -- Push mit Erfolgsmeldung
+  { "<leader>gp", function()
+    vim.cmd("silent !git push")
+    if vim.v.shell_error == 0 then
+      vim.api.nvim_echo({{ "✓ GitHub Push erfolgreich!", "DiagnosticOk" }}, true, {})
+    else
+      vim.api.nvim_echo({{ "✗ Fehler beim Push zu GitHub!", "DiagnosticError" }}, true, {})
+    end
+  end, desc = "Push to GitHub" },
+
+  -- Commit mit Erfolgsmeldung
   { "<leader>gc", function()
     local msg = vim.fn.input('Commit Message: ')
     if msg ~= "" then
-      vim.cmd('!git commit -m "' .. msg .. '"')
+      vim.cmd('silent !git commit -m "' .. msg .. '"')
+      if vim.v.shell_error == 0 then
+        vim.api.nvim_echo({{ "✓ Commit erstellt: " .. msg, "DiagnosticOk" }}, true, {})
+      else
+        vim.api.nvim_echo({{ "✗ Fehler beim Erstellen des Commits!", "DiagnosticError" }}, true, {})
+      end
     end
   end, desc = "Commit" },
 
-  -- Dein erweitertes Staging-Untermenü mit Auswahlmöglichkeit
+  -- Dein perfekt unterteiltes Staging-Untermenü mit Erfolgsmeldungen
   { "<leader>gs", group = "Stage..." },
-  { "<leader>gsa", "<cmd>!git add .<cr>",            desc = "Stage All (git add .)" },
-  { "<leader>gss", "<cmd>Gitsigns stage_buffer<cr>", desc = "Stage Current File" },
-  { "<leader>gsS", "<cmd>!git reset<cr>",            desc = "Unstage All" },
+  
+  -- Stage All mit Meldung
+  { "<leader>gsa", function()
+    vim.cmd("silent !git add .")
+    vim.api.nvim_echo({{ "✓ Alles erfolgreich gestaged!", "DiagnosticOk" }}, true, {})
+  end, desc = "Stage All (git add .)" },
+  
+  -- Stage Current File mit Meldung
+  { "<leader>gss", function()
+    vim.cmd("Gitsigns stage_buffer")
+    vim.api.nvim_echo({{ "✓ Aktuelle Datei gestaged!", "DiagnosticOk" }}, true, {})
+  end, desc = "Stage Current File" },
+  
+  -- Unstage All mit Meldung
+  { "<leader>gsS", function()
+    vim.cmd("silent !git reset")
+    vim.api.nvim_echo({{ "✓ Staging komplett zurückgesetzt!", "DiagnosticOk" }}, true, {})
+  end, desc = "Unstage All" },
 
   -- 4. UNTERMENÜ: Sektion für das Schließen des Editors
   { "<leader>q", group = "Schließen..." },
