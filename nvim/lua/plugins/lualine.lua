@@ -11,7 +11,7 @@ return {
           section_separators = { left = '', right = '' }, 
           component_separators = { left = '', right = '' },
         },
-        sections = {
+        sections  = {
           -- LINKER BEREICH
           lualine_a = { 
             {
@@ -22,7 +22,8 @@ return {
             }
           },                                 
           lualine_b = { 
-            { 'filename', path = 1 }                              -- Relativer Pfad + Dateiname
+            { 'filename', path = 1 },                             -- Relativer Pfad + Dateiname
+            'branch'                                              -- 🌿 NEU: Zeigt dauerhaft deinen aktuellen Git-Branch an
           }, 
           lualine_c = { 'diff' },                                 -- Git Änderungen (+ / ~ / -)
 
