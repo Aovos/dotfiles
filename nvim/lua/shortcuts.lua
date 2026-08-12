@@ -19,13 +19,23 @@ wk.add({
 
   -- 3. UNTERMENÜ: Sektion für deine Git-Werkzeuge (Live-Änderungen)
   { "<leader>g", group = "Git..." },
-  { "<leader>gb", "<cmd>Gitsigns blame<cr>",        desc = "Blame" }, -- 🌟 CLEAN ENGLISH
-  { "<leader>gd", "<cmd>Gitsigns diffthis<cr>",      desc = "Diff" },  -- 🌟 CLEAN ENGLISH
+  { "<leader>gb", "<cmd>Gitsigns blame<cr>",        desc = "Blame" },
+  { "<leader>gd", "<cmd>Gitsigns diffthis<cr>",      desc = "Diff" },
+  
+  -- Neue Shortcuts direkt unter Git
+  { "<leader>gp", "<cmd>!git push<cr>",             desc = "Push to GitHub" },
+  { "<leader>gc", function()
+    local msg = vim.fn.input('Commit Message: ')
+    if msg ~= "" then
+      vim.cmd('!git commit -m "' .. msg .. '"')
+    end
+  end, desc = "Commit" },
 
-  -- Sektion für das Datei-Staging
+  -- Dein erweitertes Staging-Untermenü mit Auswahlmöglichkeit
   { "<leader>gs", group = "Stage..." },
-  { "<leader>gss", "<cmd>Gitsigns stage_buffer<cr>", desc = "Gesamte Datei für Git stagen" },
-  { "<leader>gsS", "<cmd>Gitsigns reset_buffer_index<cr>", desc = "Gesamte Datei vom Staging entfernen" },
+  { "<leader>gsa", "<cmd>!git add .<cr>",            desc = "Stage All (git add .)" },
+  { "<leader>gss", "<cmd>Gitsigns stage_buffer<cr>", desc = "Stage Current File" },
+  { "<leader>gsS", "<cmd>!git reset<cr>",            desc = "Unstage All" },
 
   -- 4. UNTERMENÜ: Sektion für das Schließen des Editors
   { "<leader>q", group = "Schließen..." },
