@@ -17,13 +17,33 @@ return function()
     sh   = "bash " .. vim.fn.shellescape(vim.fn.expand("%:t"))
   }
 
-  -- Wenn die aktuelle Sprache unterstützt wird, öffne das Terminal
-  if ext_map[vim.bo.filetype] then
-    -- Öffnet einen kleinen Split unten (Höhe 12) und führt den Befehl im richtigen Ordner aus
-    vim.cmd("botright split | resize 12 | terminal cd " .. vim.fn.shellescape(vim.fn.expand("%:p:h")) .. " && " .. ext_map[vim.bo.filetype])
-    vim.cmd("startinsert") -- Springt sofort in den Terminal-Modus
-  else
-    print("Kein Runner für '" .. vim.bo.filetype .. "' definiert.")
-  end
-end
+  local filetype = vim.bo.filetype
 
+  -- Abbrechen, falls die Sprache nicht unterstützt wird
+  if not ext_map[filetype] then
+    print("Kein Runner für '" .. filetype .. "' definiert.")
+    return
+  end
+
+  -- Befehl und Pfad vorbereiten
+  local dir = vim.fn.shellescape(vim.fn.expand("%:p:h"))
+  local cmd = "cd " .. dir .. " && " .. ext_map[filetype]
+
+  -- 1. Neuen Split unten öffnen (Höhe 12)
+  vim.cmd("botright 12split")
+  
+  -- 2. Scratch-Buffer erstellen (wird beim Schließen automatisch gelöscht)
+  local buf = vim.api.nvim_create_buf(false, true)
+  
+  -- Buffer-Optionen für sauberes Terminal-Verhalten setzen
+  vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+  
+  -- Buffer im neuen Fenster anzeigen
+  vim.api.nvim_win_set_buf(0, buf)
+
+  -- 3. Terminal starten
+  vim.fn.termopen(cmd)
+  
+  -- 4. Sofort in den Terminal-Modus wechseln
+  vim.cmd("startinsert")
+end
