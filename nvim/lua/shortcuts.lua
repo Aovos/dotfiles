@@ -76,6 +76,7 @@ wk.add({
   { "<leader>l", "<cmd>Lazy<cr>",                   desc = "Lazy Menu" },
 
   { "<leader><Tab>", "<cmd>Neotree toggle<cr>",     desc = "Treeview" },
+  { "<leader>h", function() require("neo-tree.sources.filesystem.commands").toggle_hidden(require("neo-tree.sources.manager").get_state("filesystem")) end, desc = "Toggle Hidden Files" },
   { "<leader>r", rename_target,                     desc = "Rename" },
   { "<leader>x", function() move_target(false) end, desc = "Cut" },
   { "<leader><Insert>", function() move_target(true) end, desc = "Insert" },
