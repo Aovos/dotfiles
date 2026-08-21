@@ -18,6 +18,7 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd('dunstify -u normal -a "System" "Time
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("~/Scripts/Power_profiles/rofi-power-profiles.sh"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("rofi-network-manager"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("missioncenter"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " -e nvim"))
 
 -- Floating & Pinning kombiniert auf Taste P
 hl.bind(mainMod .. " + P", function()

@@ -5,9 +5,6 @@
 -- 1. Funktionale Grundeinstellungen sofort laden
 require("options")
 
--- 2. Deine eigenen Skripte (smart_save, smart_run etc.) im Hintergrund bereitstellen
-require("scripts")
-
 -- 3. lazy.nvim Plugin-Manager Bootstrapper aktivieren
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
