@@ -1,17 +1,30 @@
 [window]
-  padding = { x = 20, y = 20 }  # Abstand an den Seiten (x) und oben/unten (y)
-  opacity = 0.8
-  blur = true
-[font]
-  normal = { family = "Hack Nerd Font", style = "Regular" }
-  size =  11.0 #7.0  # Schriftgröße anpassen
-[cursor]
-  style = { shape = "Beam", blinking = "On" }  # Strichcursor, der blinkt
-  blink_interval = 400  # Blinkintervall in Millisekunden
-  blink_timeout = 0  # Zeit, nach der der Cursor aufhört zu blinken
-  unfocused_hollow = false  # Cursor nicht hohl, wenn das Fenster nicht fokussiert ist
-  thickness = 0.15  # Dicke des Cursors relativ zur Zellbreite
+opacity = 0.8
+padding = { x = 20, y = 20 }
+dynamic_padding = true
 
+[font]
+size = 12.0
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+style = "Bold"
+
+[font.italic]
+style = "Italic"
+
+[cursor]
+blink_interval = 400
+blink_timeout = 0
+unfocused_hollow = false
+thickness = 0.15
+
+[cursor.style]
+shape = "Beam"
+blinking = "On"
 
 [colors.selection]
 text = "CellForeground"
