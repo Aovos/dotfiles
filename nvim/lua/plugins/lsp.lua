@@ -22,5 +22,13 @@ return {
       capabilities = caps
     })
     vim.lsp.enable("csharp_ls")
+
+    -- 3. MARKDOWN (marksman) über die moderne native API einrichten
+    vim.lsp.config("marksman", {
+      cmd = { "marksman" }, -- Nur "marksman", ohne "server"
+      capabilities = caps
+    })
+    vim.lsp.enable("marksman") 
+    
   end
 }

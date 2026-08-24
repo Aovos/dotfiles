@@ -203,6 +203,14 @@
     settings.default = [ "alacritty.desktop" ];
   };
 
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/markdown" = "micro-terminal.desktop";
+      "text/plain" = "micro-terminal.desktop";
+    };
+  };
+
   programs.nano.enable = false; # Nano deaktivieren
 
   ####################################################################
@@ -251,8 +259,8 @@
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     GTK_THEME = "Colloid-Dark";
-    EDITOR = "micro";
-    VISUAL = "micro";
+    EDITOR = "alacritty -e micro";
+    VISUAL = "alacritty -e micro";
     SUDO_EDITOR = "micro";
   };
 
@@ -306,6 +314,17 @@
     neovim
     jetbrains.rider
     zed-editor
+
+    # Rofi fix: Run Micro inside Alacritty for .md files
+    (pkgs.makeDesktopItem {
+      name = "micro-terminal";
+      desktopName = "Micro Text Editor";
+      exec = "alacritty -e micro %F";
+      icon = "micro";
+      terminal = false;
+      mimeTypes = [ "text/markdown" "text/plain" ];
+      categories = [ "Utility" "TextEditor" ];
+    })
 
     # 🛠️ Terminal & CLI
     git
@@ -373,12 +392,16 @@
     # 🌐 Netzwerk-Helfer
     rofi-network-manager
 
-    # Java
+   # Java
     jdk21
     jdt-language-server
 
     # C#
     dotnet-sdk_10
     csharp-ls
+
+    # Markdown
+    marksman
+    prettier
   ];
 }

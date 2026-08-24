@@ -1,5 +1,5 @@
 -- ==========================================================================
--- PLUGIN: CONFORM (Automatisierte Code-Formatierung für Java & C#)
+-- PLUGIN: CONFORM (Automatisierte Code-Formatierung für Java, C# & Markdown)
 -- ==========================================================================
 
 return {
@@ -12,6 +12,9 @@ return {
       formatters_by_ft = {
         java = { "google-java-format" }, -- Nutzt das Paket aus deiner Nix-Config
         cs = { "csharpier" },            -- Nutzt das moderne C#-Formatierungstool
+        
+        -- HIER DIE ERWEITERUNG FÜR MARKDOWN EINFÜGEN:
+        markdown = { "prettier" },       -- Formatiert Text & rückt Tabellen sauber aus
       },
 
       -- Standard-Einstellungen für das Formatieren

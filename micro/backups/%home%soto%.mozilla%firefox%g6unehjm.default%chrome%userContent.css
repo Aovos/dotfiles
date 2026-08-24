@@ -1,5 +1,0 @@
-@-moz-document regexp("^(about:|chrome://browser/).*") {
-    body, #html, #main-window, window {
-        background-color: #000000 !important;
-    }
-}
