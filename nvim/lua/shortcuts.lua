@@ -37,12 +37,16 @@ local git_commit       = require("scripts.git_scripts.git_commit")
 local git_push         = require("scripts.git_scripts.git_push")
 
 local cd_path          = require("scripts.cd_path")
+local toggle_comment   = require("scripts.toggle_comment")
 
 
 require("scripts.terminal_setup")
 
 -- Register custom keybindings via Which-Key (v3+ format)
 wk.add({
+  { "<leader>/", toggle_comment.normal_mode, desc = "Toggle Comment", mode = "n" },
+  { "<leader>/", toggle_comment.visual_mode, desc = "Toggle Comment", mode = "v" },
+
   { "<leader>s", group = "Save..." },
   { "<leader>ss", function() smart_save("normal") end, desc = "Save" },
   { "<leader>sS", function() smart_save("as") end,     desc = "Save as" },
