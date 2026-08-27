@@ -5,7 +5,7 @@ local exceptions = {
   [" "] = true, -- Leader key (Spacebar)
   [":"] = true, -- Command-line mode access
   ["u"] = true, -- Built-in undo operation
-  ["d"] = true, -- Built-in undo operation
+  ["d"] = true, -- Built-in delete operation
   ["i"] = true, -- Insert mode toggle
 
 }
@@ -35,6 +35,7 @@ local move_target      = require("scripts.move_target")
 local git_stage        = require("scripts.git_scripts.git_stage")
 local git_commit       = require("scripts.git_scripts.git_commit")
 local git_push         = require("scripts.git_scripts.git_push")
+local git_pull         = require("scripts.git_scripts.git_pull")
 
 local cd_path          = require("scripts.cd_path")
 local toggle_comment   = require("scripts.toggle_comment")
@@ -57,14 +58,18 @@ wk.add({
   { "<leader>cg", generate_project,                 desc = "Generate Project" },
 
   { "<leader>g", group = "Git..." },
-  { "<leader>gb", "<cmd>Gitsigns blame<cr>",        desc = "Blame" },
-  { "<leader>gd", "<cmd>Gitsigns diffthis<cr>",     desc = "Diff" },
-  { "<leader>gp", git_push,                          desc = "Push to GitHub" },
-  { "<leader>gc", git_commit,                        desc = "Commit" },
+
   { "<leader>gs", group = "Stage..." },
-  { "<leader>gsa", git_stage.stage_all,              desc = "Stage All" },
-  { "<leader>gss", git_stage.stage_current,          desc = "Stage Current File" },
-  { "<leader>gsS", git_stage.unstage_all,            desc = "Unstage All" },
+  { "<leader>gsa", git_stage.stage_all,     desc = "Stage All" },
+  { "<leader>gss", git_stage.stage_current, desc = "Stage Current File" },
+  { "<leader>gsS", git_stage.unstage_all,   desc = "Unstage All" },
+
+  { "<leader>gc", git_commit, desc = "Commit" },
+  { "<leader>gl", git_pull,   desc = "Pull from GitHub" },
+  { "<leader>gp", git_push,   desc = "Push to GitHub" },
+
+  { "<leader>gb", "<cmd>Gitsigns blame<cr>",    desc = "Blame" },
+  { "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff" },
 
   { "<leader>n", group = "New..." },
   { "<leader>nf", function() create_target("file") end, desc = "New File" },
@@ -87,7 +92,7 @@ wk.add({
   { "<leader><Delete>", delete_target,               desc = "Delete" },
   { "<C-Tab>",   "<cmd>BufferLineCycleNext<cr>",    desc = "Next Tab" },
   { "<C-S-Tab>", "<cmd>BufferLineCyclePrev<cr>",    desc = "Previous Tab" },
-  
+
   { "<leader>p", group = "cd_path..." },
   { "<leader>ph", cd_path.to_home, desc = "cd_path Home (~)" },
   { "<leader>pf", cd_path.to_file, desc = "cd_path File (Aktuelle Datei)" },
