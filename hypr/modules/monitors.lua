@@ -1,18 +1,21 @@
 -- [[ Modul: Monitore - modules/monitors.lua ]] --
 
--- Dein Haupt-Laptop-Bildschirm (eDP-1)
+-- 1. Externe Monitore (Plug & Play)
+-- Trifft auf jeden neu angeschlossenen Bildschirm zu.
+-- Nutzt immer die optimale ("preferred") Auflösung des Geräts.
 hl.monitor({
-  output = "eDP-1",
-  mode = "1920x1080@144",
-  position = "0x0",
+  output = "", 
+  mode = "preferred",
+  position = "0x0", -- Setzt den externen Monitor als primären Startpunkt
   scale = 1,
-  disabled = true,
 })
 
--- Fallback-Regel für neu angesteckte Bildschirme
+-- 2. Dein Haupt-Laptop-Bildschirm (eDP-1)
+-- Nutzt ebenfalls die optimale ("preferred") Auflösung des Laptops.
+-- Schaltet die Ausgabe automatisch ab, wenn ein externer Monitor aktiv ist.
 hl.monitor({
-  output = "",
+  output = "eDP-1",
   mode = "preferred",
   position = "auto",
-  scale = 1,
+  disabled = false, -- Bleibt aktiv, wenn kein anderer Monitor da ist
 })
