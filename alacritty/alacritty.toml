@@ -1,4 +1,5 @@
 [window]
+# Test Kommentar
 opacity = 0.6
 padding = { x = 20, y = 20 }
 dynamic_padding = true
