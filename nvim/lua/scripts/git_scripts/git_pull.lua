@@ -4,7 +4,7 @@
 -- ==========================================================================
 
 return function()
-  local output = vim.fn.system("git pull 2>&1")
+  local output = vim.fn.system("git pull --no-rebase 2>&1")
   local exit_code = vim.v.shell_error
 
   if exit_code == 0 then
