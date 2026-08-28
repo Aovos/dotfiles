@@ -398,7 +398,7 @@
     dotnet-sdk_10
     csharp-ls
 
-    # Markdown
+    # Markdown test
     marksman
     prettier
   ];
