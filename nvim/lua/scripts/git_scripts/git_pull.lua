@@ -1,5 +1,5 @@
 -- ==========================================================================
--- MODULE: git_pugg
+-- MODULE: git_pull
 -- Robuster Git-Pull für Neovim
 --
 -- Features:
