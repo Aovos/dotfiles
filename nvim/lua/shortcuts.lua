@@ -5,6 +5,7 @@ local exceptions = {
   [" "] = true, -- Leader key (Spacebar)
   [":"] = true, -- Command-line mode access
   ["u"] = true, -- Built-in undo operation
+  ["U"] = true, -- Redo key
   ["d"] = true, -- Built-in delete operation
   ["i"] = true, -- Insert mode toggle
 
@@ -115,6 +116,8 @@ vim.keymap.set("i", "<C-v>", '<C-r>+', { desc = "Paste (Insert Mode)" })
 
 -- Select all document content and switch to Visual mode
 vim.keymap.set({ "n", "i", "v" }, "<C-a>", "<Esc>ggVG", { desc = "Select All" })
+
+vim.keymap.set("n", "U", "<C-r>", { desc = "Redo" }) --Redo Shortcut
 
 -- ==========================================================================
 -- 4. WINDOWS-STYLE TEXT SELECTION (SHIFT + ARROWS)
