@@ -32,7 +32,7 @@ end)
 -- Code-Lese-Modus (Resize + Zentrieren) auf Taste C
 hl.bind(mainMod .. " + C", function()
   -- x und y müssen in der neuen API oft als Tabelle in resize übergeben werden
-  hl.dispatch(hl.dsp.window.resize({ x = 1000, y = 1020, relative = false }))
+  hl.dispatch(hl.dsp.window.resize({ x = 1600, y = 1020, relative = false }))
   hl.dispatch(hl.dsp.window.center())
 end)
 
