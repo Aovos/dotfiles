@@ -1,4 +1,4 @@
--- MODULE: git_pust
+-- MODULE: git_pukk
 -- Robuster Git-Pull für Neovim
 --
 -- Features:
