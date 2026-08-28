@@ -6,7 +6,7 @@
 hl.monitor({
   output = "", 
   mode = "preferred",
-  position = "0x0", -- Setzt den externen Monitor als primären Startpunkt
+  position = "auto", -- Setzt den externen Monitor als primären Startpunkt
   scale = 1,
 })
 
@@ -17,5 +17,6 @@ hl.monitor({
   output = "eDP-1",
   mode = "preferred",
   position = "auto",
+  scale = 1,
   disabled = false, -- Bleibt aktiv, wenn kein anderer Monitor da ist
 })

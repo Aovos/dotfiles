@@ -6,7 +6,7 @@ hl.window_rule({ match = { class = "firefox" }, workspace = "1 silent" })
 
 -- Workspace 2: Mail
 hl.window_rule({ match = { class = "thunderbird" }, workspace = "2 silent" })
-hl.window_rule({ match = { class = "chrome-eoficlgicibekocmfdomjbfnjmehnhcd-Default" }, workspace = "2 silent" })
+hl.window_rule({ match = { class = "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default" }, workspace = "2 silent" })
 
 
 -- Workspace 3: Chat
