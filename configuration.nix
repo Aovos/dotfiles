@@ -295,6 +295,7 @@
     thunderbird
     signal-desktop
     teams-for-linux
+    syncthing
 
     # 🧠 Produktivität & Wissen
     super-productivity
@@ -308,7 +309,6 @@
     xournalpp
 
     # 💻 Editoren & Entwicklung
-    helix
     micro
     alacritty
     neovim
@@ -369,6 +369,7 @@
 
     # 🖥️ Desktop UI
     rofi
+    rofimoji
     dunst
 
     # 📁 Dateimanagement (Beide behalten für maximale Features!)

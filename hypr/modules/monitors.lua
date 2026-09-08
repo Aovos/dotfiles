@@ -1,10 +1,11 @@
 -- [[ Modul: Monitore - modules/monitors.lua ]] --
+-- TIPP: Nutze "hyprctl monitors" im Terminal, um alle angeschlossene Monitore anzuzeigen
 
 -- 1. Externe Monitore (Plug & Play)
 -- Trifft auf jeden neu angeschlossenen Bildschirm zu.
 -- Nutzt immer die optimale ("preferred") Auflösung des Geräts.
 hl.monitor({
-  output = "", 
+  output = "",
   mode = "preferred",
   position = "auto", -- Setzt den externen Monitor als primären Startpunkt
   scale = 1,
@@ -18,5 +19,5 @@ hl.monitor({
   mode = "preferred",
   position = "auto",
   scale = 1,
-  disabled = false, -- Bleibt aktiv, wenn kein anderer Monitor da ist
+  disabled = true,
 })

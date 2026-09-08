@@ -21,6 +21,7 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("rofi-network-manager"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("missioncenter"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " -e nvim"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(terminal .. " -e sh -c 'cd ~/Git/dotfiles && nvim'"))
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rofimoji --action type"))
 
 
 -- Floating & Pinning kombiniert auf Taste P
