@@ -269,6 +269,8 @@
   ####################################################################
   fonts.packages = with pkgs; [
     nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.monaspace
     nerd-fonts.symbols-only
   ];
 
@@ -371,6 +373,10 @@
     rofi
     rofimoji
     dunst
+    libnotify
+    waybar
+    cava
+    wttrbar
 
     # 📁 Dateimanagement (Beide behalten für maximale Features!)
     nemo
@@ -402,5 +408,8 @@
     # Markdown bxb
     marksman
     prettier
+
+    # HTML / CSS
+    vscode-langservers-extracted
   ];
 }

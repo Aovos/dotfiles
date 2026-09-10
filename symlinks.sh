@@ -26,3 +26,6 @@ ln -s ~/Git/dotfiles/rofi ~/.config/rofi
 
 # --- SCRIPTS ---
 ln -s ~/Git/dotfiles/Scripts ~/Scripts
+
+# --- WAYBAR ---
+ln -s ~/Git/dotfiles/waybar ~/.config/waybar

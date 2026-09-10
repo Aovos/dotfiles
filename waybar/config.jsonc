@@ -1,0 +1,281 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    // *****************
+    // * Modules Order *
+    // *****************
+    "modules-left": [
+        "clock",
+        "custom/moonphase",
+        "custom/weather",
+        "custom/songrec",
+        "cava"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "tray",
+        "cpu",
+        "temperature",
+        "memory",
+        "disk",
+        "network",
+        "bluetooth",
+        "pulseaudio",
+        "power-profiles-daemon",
+        "battery"
+    ],
+    // ********
+    // * Left *
+    // ********
+    "clock": {
+        "format": " 󰔟 {:%H:%M}",
+        "tooltip": true,
+        "tooltip-format": "{:%A, %d.%m.%Y}"
+    },
+    "custom/moonphase": {
+        "tooltip": false,
+        "format": "{}",
+        "interval": 3600,
+        "exec": "curl -s 'wttr.in/?format=%m'"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": false,
+        "interval": 10,
+        "exec": "wttrbar --nerd --custom-indicator ' {temp_C}°C {ICON}'",
+        "return-type": "json"
+    },
+    "custom/songrec": {
+        "format": "", // Hier kannst du dein Glyph einfügen (z.B. von FontAwesome oder Nerd Fonts)
+        "tooltip": false,
+        "on-click": "songrec"
+    },
+    "cava": {
+
+        // General
+        "framerate": 60,
+        "input_delay": 1,
+        
+        // Audio Input
+        "method": "pipewire", // Alternativen: "pulse"
+        "source": "auto",
+
+        // Sensitivity
+        "autosens": 1,
+        //"sensitivity": 2,
+        
+        // Frequency Range
+        "lower_cutoff_freq": 20,
+        "higher_cutoff_freq": 20000,
+
+        //Bars
+        "bars": 32,
+        "bar_spacing": 0,
+       
+        // Visualizer Characters
+        "format-icons": [" ", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "sleep_timer": 2,
+        "hide_on_silence": false,
+        
+        // Smoothing
+        "monstercat": true,
+        "waves": true,
+        "noise_reduction": 0, // Smoothing factor (0.0 = direkt und reaktiv, 1.0 = weich und träge)
+
+        // Stereo
+        "stereo": true,
+        "reverse": false,
+
+        // Raw Output
+        "data_format": "ascii",
+        "bar_delimiter": 0 // Trennzeichen zwischen den Bars (0 = kein Abstand)
+    },
+    // **************
+    // * Workspaces *
+    // **************
+    "hyprland/workspaces": {
+        "format": "{icon}",
+
+        "persistent-workspaces": {
+            "*": [1,2,3,4,5,6,7,8,9,10]
+        },
+        "format-icons": {
+            "1": "󰈹",
+            "2": "󰇮",
+            "3": "",
+            "4": "󰉌",
+            "5": "󰎆",
+            "6": "󱣴",
+            "7": "",
+            "8": "",
+            "9": "󰈔",
+            "10": "󰗠",
+            "urgent": "",
+            "default": ""
+        },
+        "sort-by-number": true,
+        "on-click": "activate"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8,
+        "show-passive-items": true,
+        "reverse-direction": false,
+        "expand": false
+    },
+    "custom/gpu": {
+        "interval": 1,
+        "tooltip": false,
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print \"{\\\"percentage\\\": \" $1 \"}\"}'",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": [
+            "", // Slice 0 (für die Grundlast)
+            "󰪞", // Slice 1
+            "󰪟", // Slice 2
+            "󰪠", // Slice 3
+            "󰪡", // Slice 4
+            "󰪢", // Slice 5
+            "󰪣", // Slice 6
+            "󰪤", // Slice 7
+            "󰪥" // Slice 8 (Vollast)
+        ]
+    },
+    "cpu": {
+        "interval": 1,
+        "format": "{icon}",
+        "tooltip": false,
+        "format-icons": [
+            "", // Slice 0 (für die Grundlast)
+            "󰪞", // Slice 1
+            "󰪟", // Slice 2
+            "󰪠", // Slice 3
+            "󰪡", // Slice 4
+            "󰪢", // Slice 5
+            "󰪣", // Slice 6
+            "󰪤", // Slice 7
+            "󰪥" // Slice 8 (Vollast)
+        ]
+    },
+    "temperature": {
+        "tooltip": false,
+        "thermal-zone": 7,
+        "interval": 2,
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C"
+    },
+    "custom/gpu-temp": {
+        "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",
+        "format": " {}°C",
+        "interval": 2,
+        "return-type": "",
+        "tooltip": false
+    },
+    "memory": {
+        "interval": 60,
+        "format": " {used:0.0f}GB",
+        "tooltip": true,
+        "tooltip-format": "  {used:0.0f}/{total:0.0f}GB | ({percentage}%)"
+    },
+    "disk": {
+        "interval": 600,
+        "format": "󱛟 {specific_used:0.0f}GB",
+        "unit": "GB",
+        "path": "/",
+        "tooltip": true,
+        "tooltip-format": "󱛟 {specific_used:0.0f}/{specific_total:0.0f}GB | ({percentage_used}%)"
+    },
+    "network": {
+        "on-click": "rofi-network-manager",
+        "tooltip": true,
+        "tooltip-format-wifi": "{essid}",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disabled": "wifi off",
+        "tooltip-format-disconnected": "unconnected",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈁",
+        "format-disconnected": "󰤯",
+        "format-disabled": "󰤮",
+        "format-icons": {
+            "default": [
+                "󰤯",
+                "󰤟",
+                "󰤢",
+                "󰤥",
+                "󰤨"
+            ]
+        }
+    },
+    "bluetooth": {
+        // "controller": "csontroller1", // specify the alias of the controller if there are more than 1 on the system
+        "on-click": "blueman-manager",
+        "format-on": "",
+        "format-off": "󰂲",
+        "format-connected": "",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-disconnected": "unconnected",
+        "tooltip-format-enumerate-connected": "{device_alias}" // Zeigt pro Zeile nur den Gerätenamen
+    },
+    "pulseaudio": {
+        "on-click": "pavucontrol",
+        "reverse-scrolling": true,
+        "scroll-step": 5,
+        "max-volume": 150,
+        "tooltip": true,
+        "tooltip-format": "{desc}\n{volume}%",
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-headphone": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "bluetooth": "",
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        }
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "{profile}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "battery": {
+        "interval": 60,
+        "tooltip": true,
+        "tooltip-format": "{capacity}%",
+
+        "states": {
+            "warning": 15,
+            "critical": 5
+        },
+
+        "events": {
+		    "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+		    "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+		    "on-charging-100": "notify-send -u normal 'Battery Full!'",
+		    "on-discharging": "notify-send -u normal 'Power Switch' Discharging",
+		    "on-charging": "notify-send -u normal 'Power Switch' Charging'"
+	    },
+
+        "format": "{icon}",
+        "format-icons": {
+            "default": [ "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
+            "charging": [ "󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅" ]
+    }
+} 
+}

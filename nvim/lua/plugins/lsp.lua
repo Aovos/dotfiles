@@ -28,7 +28,21 @@ return {
       cmd = { "marksman" }, -- Nur "marksman", ohne "server"
       capabilities = caps
     })
-    vim.lsp.enable("marksman") 
+    vim.lsp.enable("marksman")
+
+    -- 4. HTML
+    vim.lsp.config("html", {
+      cmd = { "vscode-html-language-server", "--stdio" },
+      capabilities = caps
+    })
+    vim.lsp.enable("html")
+
+    -- 5. CSS
+    vim.lsp.config("cssls", {
+      cmd = { "vscode-css-language-server", "--stdio" },
+      capabilities = caps
+    })
+    vim.lsp.enable("cssls")
     
   end
 }
