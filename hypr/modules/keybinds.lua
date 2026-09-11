@@ -22,6 +22,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("missioncenter"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " -e nvim"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(terminal .. " -e sh -c 'cd ~/Git/dotfiles && nvim'"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rofimoji --action type"))
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("~/Git/dotfiles/Scripts/Powermenu/powermenu.sh"))
 
 
 -- Floating & Pinning kombiniert auf Taste P
