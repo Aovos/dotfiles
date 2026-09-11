@@ -18,6 +18,7 @@
 @define-color color_audio #4db6ac;
 @define-color color_battery #81c784;
 @define-color color_backlight #ffd54f;
+@define-color color_power #cf6679;
 @define-color urgent #cf6679;
 
 /* ==========================================================================
@@ -56,6 +57,7 @@ window#waybar {
 #pulseaudio,
 #power-profiles-daemon,
 #battery,
+#custom-power,
 #tray {
     background-color: @bg_module;
     padding: 2px 14px;
@@ -68,7 +70,7 @@ window#waybar {
     margin-left: 10px;
 }
 
-.modules-right>widget:last-child>#battery {
+.modules-right>widget:last-child>#custom-power {
     margin-right: 10px;
 }
 
@@ -218,6 +220,10 @@ window#waybar {
     color: #ffe082;
 }
 
+#custom-power {
+    color: @color_power;
+}
+
 /* ==========================================================================
    HOVER EFFEKTE (INTERAKTIVE MODULE)
    ========================================================================== */
@@ -248,6 +254,11 @@ window#waybar {
 
 #power-profiles-daemon:hover {
     background-color: @color_songrec;
+    color: @bg_bar;
+}
+
+#custom-power:hover {
+    background-color: @color_power;
     color: @bg_bar;
 }
 

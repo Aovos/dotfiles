@@ -27,7 +27,8 @@
         "bluetooth",
         "pulseaudio",
         "power-profiles-daemon",
-        "battery"
+        "battery",
+        "custom/power"
     ],
     // ********
     // * Left *
@@ -287,5 +288,10 @@
             "default": [ "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
             "charging": [ "󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅" ]
         }
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/Git/dotfiles/Scripts/Powermenu/powermenu.sh"
     }
 }
