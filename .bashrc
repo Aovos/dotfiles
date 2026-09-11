@@ -3,5 +3,7 @@
 # Custom Home Prompt (Replaces $HOME with )
 export PS1="\[\e[38;5;110m\]\${PWD/#\$HOME/ } \[\e[m\]"
 
+[ -f ~/.weather-location.sh ] && source ~/.weather-location.sh
+
 # Custom Aliases
 alias dotfiles="cd ~/Git/dotfiles && nvim"

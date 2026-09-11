@@ -54,6 +54,7 @@ window#waybar {
 #backlight,
 #network,
 #bluetooth,
+#pulseaudio.microphone,
 #pulseaudio,
 #power-profiles-daemon,
 #battery,
@@ -190,6 +191,10 @@ window#waybar {
     color: @color_weather;
 }
 
+#pulseaudio.microphone {
+    color: @color_audio;
+}
+
 #pulseaudio {
     color: @color_audio;
 }
@@ -244,6 +249,11 @@ window#waybar {
 
 #bluetooth:hover {
     background-color: @color_weather;
+    color: @bg_bar;
+}
+
+#pulseaudio.microphone:hover {
+    background-color: @color_audio;
     color: @bg_bar;
 }
 

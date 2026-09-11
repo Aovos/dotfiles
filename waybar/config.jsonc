@@ -25,6 +25,7 @@
         "backlight",
         "network",
         "bluetooth",
+        "pulseaudio#microphone",
         "pulseaudio",
         "power-profiles-daemon",
         "battery",
@@ -42,16 +43,16 @@
         "tooltip": false,
         "format": "{}",
         "interval": 3600,
-        "exec": "curl -s 'wttr.in/?format=%m'"
+        "exec": "curl -s \"wttr.in/${WTTR_LOCATION}?format=%m\""
     },
     "custom/weather": {
         "format": "{}",
         "tooltip": false,
-        "interval": 10,
-        "exec": "wttrbar --nerd --custom-indicator ' {temp_C}°C {ICON}'",
-        "return-type": "json"
+        "interval": 600,
+        "exec": "curl -s \"wttr.in/${WTTR_LOCATION}?format=+%t+%c\"",
+        "return-type": "text"
     },
-    "custom/songrec": {
+        "custom/songrec": {
         "format": "", // Hier kannst du dein Glyph einfügen (z.B. von FontAwesome oder Nerd Fonts)
         "tooltip": false,
         "on-click": "songrec"
@@ -234,27 +235,45 @@
         "tooltip-format-disconnected": "unconnected",
         "tooltip-format-enumerate-connected": "{device_alias}" // Zeigt pro Zeile nur den Gerätenamen
     },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "󰍬",
+        "format-source-muted": "󰍭",
+
+        "tooltip": true,
+        "tooltip-format": "{source_volume}%",
+
+        "scroll-step": 5,
+
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+
+        "format-source-muted": "󰍭",
+        "format-source": "󰍬"
+    },
     "pulseaudio": {
-        "on-click": "pavucontrol",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+
         "reverse-scrolling": true,
         "scroll-step": 5,
         "max-volume": 150,
+
         "tooltip": true,
         "tooltip-format": "{desc}\n{volume}%",
+
         "format": "{icon}",
         "format-bluetooth": "{icon}",
         "format-headphone": "{icon} {volume}%",
         "format-muted": "",
+
         "format-icons": {
             "bluetooth": "",
             "headphone": "",
             "hands-free": "",
             "headset": "",
-            "default": [
-                "",
-                "",
-                ""
-            ]
+            "default": [ "", "", "" ]
         }
     },
     "power-profiles-daemon": {
