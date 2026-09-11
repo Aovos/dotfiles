@@ -11,7 +11,6 @@
         "custom/moonphase",
         "custom/weather",
         "custom/songrec",
-        "mpris",
         "cava"
     ],
     "modules-center": [
@@ -55,23 +54,14 @@
         "format": "", // Hier kannst du dein Glyph einfügen (z.B. von FontAwesome oder Nerd Fonts)
         "tooltip": false,
         "on-click": "songrec"
-    },
-    "mpris": {
-	    "format": "{player_icon} {dynamic}",
-	    "format-paused": "{status_icon} <i>{dynamic}</i>",
-        "max-length": 20,
+    }, 
+    "cava": {
+        // Player
+        "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
-	    "player-icons": {
-	    	"default": "",
-    		"mpv": "🎵"
-	    },
-	    "status-icons": {
-		    "paused": ""
-	    }
-	    // "ignored-players": ["firefox"]
-    },
-    "cava": {
+        "on-click-right": "sh -c 'case $(playerctl metadata --format \"{{playerName}}\") in spotify) icon=\"\" ;; firefox) icon=\"󰈹\" ;; chromium) icon=\"\" ;; brave) icon=\"󰖟\" ;; vlc) icon=\"󰕼\" ;; *) icon=\"󰎈\" ;; esac; notify-send \"$icon  $(playerctl metadata --format \"{{ title }} - {{ artist }}\")\"'",
+
         // General
         "framerate": 60,
         "input_delay": 1,

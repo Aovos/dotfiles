@@ -2,47 +2,29 @@
    FARBEN & ACCENTS (Pitch Black / Amoled-Style)
    ========================================================================== */
 @define-color bg_bar #000000;
-/* Tiefschwarz für die Hauptbar */
 @define-color bg_module #111111;
-/* Sehr dunkles Grau für die Kapseln */
 @define-color bg_hover #222222;
-/* Hover-Effekt für Knöpfe */
 @define-color text_main #e0e0e0;
-/* Klares, helles Weiß/Grau für Text */
 
 /* Edle, dezente Akzentfarben */
 @define-color color_clock #bb86fc;
-/* Pastell-Lila */
 @define-color color_moon #a5a5a5;
-/* Mond-Grau */
 @define-color color_weather #64b5f6;
-/* Soft-Blau */
 @define-color color_songrec #f48fb1;
-/* Soft-Pink */
-@define-color color_mpris #43a047;
-/* Tiefes Grün für MPRIS */
+@define-color color_cava_hover #43a047;
 @define-color color_cava #81c784;
-/* Soft-Grün */
 @define-color color_hardware #e0e0e0;
-/* Clean Weiß für Hardware */
 @define-color color_net #4fc3f7;
-/* Hellblau */
 @define-color color_audio #4db6ac;
-/* Mint/Teal */
 @define-color color_battery #81c784;
-/* Soft-Grün */
 @define-color color_backlight #ffd54f;
-/* Warmes Gelb für Helligkeit */
-
 @define-color urgent #cf6679;
-/* Dunkles Warn-Rot */
 
 /* ==========================================================================
    GLOBALES STYLING
    ========================================================================== */
 * {
     font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
-    /*Hack Nerd Font", "Roboto*/
     font-size: 15px;
     font-weight: bold;
     border: none;
@@ -63,7 +45,6 @@ window#waybar {
 #custom-moonphase,
 #custom-weather,
 #custom-songrec,
-#mpris,
 #cava,
 #cpu,
 #temperature,
@@ -80,12 +61,9 @@ window#waybar {
     padding: 2px 14px;
     margin: 5px 3px;
     border-radius: 8px;
-    /* Etwas kantiger/moderner für den Black-Look */
     border: 1px solid #1f1f1f;
-    /* Dezente Kontur, damit die Kapseln auf Schwarz sichtbar sind */
 }
 
-/* Ränder links und rechts bündig machen */
 .modules-left>widget:first-child>#clock {
     margin-left: 10px;
 }
@@ -115,22 +93,6 @@ window#waybar {
     padding: 2px 12px;
 }
 
-#custom-songrec:hover {
-    background-color: @color_songrec;
-    color: @bg_bar;
-}
-
-#mpris {
-    color: @color_mpris;
-    padding: 2px 12px;
-    margin-left: 3px;
-}
-
-#mpris:hover {
-    background-color: @color_mpris;
-    color: @bg_bar;
-}
-
 #cava {
     color: @color_cava;
     padding: 2px 8px;
@@ -152,41 +114,33 @@ window#waybar {
 #workspaces button {
     margin: 2px 2px;
     padding: 2px 5px;
-
-    /* Workspaces mit Fenstern */
     color: #ffffff;
     background: transparent;
-
     transition: all 0.08s ease-in-out;
 }
 
-/* Leere Workspaces */
 #workspaces button.empty {
     color: #777777;
 }
 
-/* Hover */
 #workspaces button:hover {
     color: @text_main;
     background: @bg_hover;
     border-radius: 6px;
 }
 
-/* Aktiver Workspace */
 #workspaces button.active {
     color: @color_clock;
     background-color: rgba(187, 134, 252, 0.15);
     border-radius: 6px;
 }
 
-/* Workspaces mit geöffneten Fenstern */
 #workspaces button.occupied {
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.03);
     border-radius: 6px;
 }
 
-/* Dringliche Workspaces */
 #workspaces button.urgent {
     color: @urgent;
     background-color: rgba(207, 102, 121, 0.15);
@@ -252,7 +206,6 @@ window#waybar {
 
 #battery.warning {
     color: #ffb74d;
-    /* Orange */
 }
 
 #battery.critical:not(.charging) {
@@ -263,6 +216,39 @@ window#waybar {
 
 #battery.charging {
     color: #ffe082;
+}
+
+/* ==========================================================================
+   HOVER EFFEKTE (INTERAKTIVE MODULE)
+   ========================================================================== */
+#custom-songrec:hover {
+    background-color: @color_songrec;
+    color: @bg_bar;
+}
+
+#cava:hover {
+    background-color: @color_cava_hover;
+    color: @bg_bar;
+}
+
+#network:hover {
+    background-color: @color_net;
+    color: @bg_bar;
+}
+
+#bluetooth:hover {
+    background-color: @color_weather;
+    color: @bg_bar;
+}
+
+#pulseaudio:hover {
+    background-color: @color_audio;
+    color: @bg_bar;
+}
+
+#power-profiles-daemon:hover {
+    background-color: @color_songrec;
+    color: @bg_bar;
 }
 
 /* ==========================================================================
@@ -278,7 +264,6 @@ window#waybar {
 /* ==========================================================================
    TOOLTIPS & CONTEXT MENUS
    ========================================================================== */
-
 tooltip {
     background: #181818;
     border: 1px solid #2c2c2c;
@@ -294,22 +279,16 @@ tooltip label {
 menu {
     background: #181818;
     border: 1px solid #2c2c2c;
-
     border-radius: 12px;
     padding: 6px;
-
     box-shadow: none;
-
     font-size: 15px;
 }
 
 menuitem {
     color: #e0e0e0;
-
     padding: 8px 14px;
-
     border-radius: 8px;
-
     font-size: 15px;
     font-weight: bold;
 }
@@ -318,8 +297,6 @@ menuitem:hover {
     background: #2a2a2a;
     color: #bb86fc;
 }
-
-/* GTK Decorations */
 
 menu decoration,
 tooltip decoration,
