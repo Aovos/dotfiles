@@ -22,6 +22,7 @@
         "temperature",
         "memory",
         "disk",
+        "backlight",
         "network",
         "bluetooth",
         "pulseaudio",
@@ -55,7 +56,6 @@
         "on-click": "songrec"
     },
     "cava": {
-
         // General
         "framerate": 60,
         "input_delay": 1,
@@ -99,7 +99,6 @@
     // **************
     "hyprland/workspaces": {
         "format": "{icon}",
-
         "persistent-workspaces": {
             "*": [1,2,3,4,5,6,7,8,9,10]
         },
@@ -189,6 +188,14 @@
         "tooltip": true,
         "tooltip-format": "󱛟 {specific_used:0.0f}/{specific_total:0.0f}GB | ({percentage_used}%)"
     },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "tooltip": true,
+        "tooltip-format": "{percent}%",
+        "scroll-step": 5,
+        "format-icons": [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+    },
     "network": {
         "on-click": "rofi-network-manager",
         "tooltip": true,
@@ -258,12 +265,10 @@
         "interval": 60,
         "tooltip": true,
         "tooltip-format": "{capacity}%",
-
         "states": {
             "warning": 15,
             "critical": 5
         },
-
         "events": {
 		    "on-discharging-warning": "notify-send -u normal 'Low Battery'",
 		    "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
@@ -271,11 +276,10 @@
 		    "on-discharging": "notify-send -u normal 'Power Switch' Discharging",
 		    "on-charging": "notify-send -u normal 'Power Switch' Charging'"
 	    },
-
         "format": "{icon}",
         "format-icons": {
             "default": [ "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
             "charging": [ "󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅" ]
+        }
     }
-} 
 }

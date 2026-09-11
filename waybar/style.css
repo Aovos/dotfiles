@@ -1,29 +1,46 @@
 /* ==========================================================================
    FARBEN & ACCENTS (Pitch Black / Amoled-Style)
    ========================================================================== */
-@define-color bg_bar      #000000;                 /* Tiefschwarz für die Hauptbar */
-@define-color bg_module   #111111;                 /* Sehr dunkles Grau für die Kapseln */
-@define-color bg_hover    #222222;                 /* Hover-Effekt für Knöpfe */
-@define-color text_main   #e0e0e0;                 /* Klares, helles Weiß/Grau für Text */
+@define-color bg_bar #000000;
+/* Tiefschwarz für die Hauptbar */
+@define-color bg_module #111111;
+/* Sehr dunkles Grau für die Kapseln */
+@define-color bg_hover #222222;
+/* Hover-Effekt für Knöpfe */
+@define-color text_main #e0e0e0;
+/* Klares, helles Weiß/Grau für Text */
 
 /* Edle, dezente Akzentfarben */
-@define-color color_clock     #bb86fc;  /* Pastell-Lila */
-@define-color color_moon      #a5a5a5;  /* Mond-Grau */
-@define-color color_weather   #64b5f6;  /* Soft-Blau */
-@define-color color_songrec   #f48fb1;  /* Soft-Pink */
-@define-color color_cava      #81c784;  /* Soft-Grün */
-@define-color color_hardware  #e0e0e0;  /* Clean Weiß für Hardware */
-@define-color color_net       #4fc3f7;  /* Hellblau */
-@define-color color_audio     #4db6ac;  /* Mint/Teal */
-@define-color color_battery   #81c784;  /* Soft-Grün */
+@define-color color_clock #bb86fc;
+/* Pastell-Lila */
+@define-color color_moon #a5a5a5;
+/* Mond-Grau */
+@define-color color_weather #64b5f6;
+/* Soft-Blau */
+@define-color color_songrec #f48fb1;
+/* Soft-Pink */
+@define-color color_cava #81c784;
+/* Soft-Grün */
+@define-color color_hardware #e0e0e0;
+/* Clean Weiß für Hardware */
+@define-color color_net #4fc3f7;
+/* Hellblau */
+@define-color color_audio #4db6ac;
+/* Mint/Teal */
+@define-color color_battery #81c784;
+/* Soft-Grün */
+@define-color color_backlight #ffd54f;
+/* Warmes Gelb für Helligkeit */
 
-@define-color urgent      #cf6679;  /* Dunkles Warn-Rot */
+@define-color urgent #cf6679;
+/* Dunkles Warn-Rot */
 
 /* ==========================================================================
    GLOBALES STYLING
    ========================================================================== */
 * {
-    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif; /*Hack Nerd Font", "Roboto*/
+    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+    /*Hack Nerd Font", "Roboto*/
     font-size: 15px;
     font-weight: bold;
     border: none;
@@ -49,6 +66,7 @@ window#waybar {
 #temperature,
 #memory,
 #disk,
+#backlight,
 #network,
 #bluetooth,
 #pulseaudio,
@@ -58,13 +76,20 @@ window#waybar {
     background-color: @bg_module;
     padding: 2px 14px;
     margin: 5px 3px;
-    border-radius: 8px; /* Etwas kantiger/moderner für den Black-Look */
-    border: 1px solid #1f1f1f; /* Dezente Kontur, damit die Kapseln auf Schwarz sichtbar sind */
+    border-radius: 8px;
+    /* Etwas kantiger/moderner für den Black-Look */
+    border: 1px solid #1f1f1f;
+    /* Dezente Kontur, damit die Kapseln auf Schwarz sichtbar sind */
 }
 
 /* Ränder links und rechts bündig machen */
-.modules-left > widget:first-child > #clock { margin-left: 10px; }
-.modules-right > widget:last-child > #battery { margin-right: 10px; }
+.modules-left>widget:first-child>#clock {
+    margin-left: 10px;
+}
+
+.modules-right>widget:last-child>#battery {
+    margin-right: 10px;
+}
 
 /* ==========================================================================
    LINKE MODULE (Info & Media)
@@ -86,6 +111,7 @@ window#waybar {
     color: @color_songrec;
     padding: 2px 12px;
 }
+
 #custom-songrec:hover {
     background-color: @color_songrec;
     color: @bg_bar;
@@ -161,8 +187,15 @@ window#waybar {
     border: none;
 }
 
-#cpu, #temperature, #memory, #disk {
+#cpu,
+#temperature,
+#memory,
+#disk {
     color: @color_hardware;
+}
+
+#backlight {
+    color: @color_backlight;
 }
 
 #temperature.critical {
@@ -173,13 +206,16 @@ window#waybar {
 #network {
     color: @color_net;
 }
-#network.disconnected, #network.disabled {
+
+#network.disconnected,
+#network.disabled {
     color: @urgent;
 }
 
 #bluetooth {
     color: @color_net;
 }
+
 #bluetooth.connected {
     color: @color_weather;
 }
@@ -187,6 +223,7 @@ window#waybar {
 #pulseaudio {
     color: @color_audio;
 }
+
 #pulseaudio.muted {
     color: #555555;
 }
@@ -198,14 +235,18 @@ window#waybar {
 #battery {
     color: @color_battery;
 }
+
 #battery.warning {
-    color: #ffb74d; /* Orange */
+    color: #ffb74d;
+    /* Orange */
 }
+
 #battery.critical:not(.charging) {
     background-color: @urgent;
     color: @bg_bar;
     animation: blink 0.5s alternate infinite;
 }
+
 #battery.charging {
     color: #ffe082;
 }

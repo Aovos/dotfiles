@@ -374,6 +374,8 @@
     rofimoji
     dunst
     libnotify
+    
+    # Taskbar
     waybar
     cava
     wttrbar
