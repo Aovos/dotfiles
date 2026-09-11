@@ -41,14 +41,16 @@
             "mode": "month",
             "mode-mon-col": 3,
             "weeks-pos": "left",
+            "weeks-numbering": "iso",
             "first-day-of-week": 1,
+            "iso8601": true,
             "format": {
                 "months": "<span color='#bb86fc'><b>{}</b></span>",
                 "weeks": "<span color='#777777'><b>KW{}</b></span>",
                 "weekdays": "<span color='#b0b0b0'><b>{}</b></span>",
                 "days": "<span color='#e0e0e0'><b>{}</b></span>",
                 "today": "<span color='#64b5f6'><b><u>{}</u></b></span>"
-            } 
+            }
         },
         "actions": {
             "on-click": "mode",
