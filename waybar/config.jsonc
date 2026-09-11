@@ -35,9 +35,26 @@
     // * Left *
     // ********
     "clock": {
-        "format": " 󰔟 {:%H:%M}",
-        "tooltip": true,
-        "tooltip-format": "{:%A, %d.%m.%Y}"
+        "format": "󰔟 {:%H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "left",
+            "first-day-of-week": 1,
+            "format": {
+                "months": "<span color='#bb86fc'><b>{}</b></span>",
+                "weeks": "<span color='#777777'><b>KW{}</b></span>",
+                "weekdays": "<span color='#b0b0b0'><b>{}</b></span>",
+                "days": "<span color='#e0e0e0'><b>{}</b></span>",
+                "today": "<span color='#64b5f6'><b><u>{}</u></b></span>"
+            } 
+        },
+        "actions": {
+            "on-click": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "custom/moonphase": {
         "tooltip": false,
@@ -50,9 +67,10 @@
         "tooltip": false,
         "interval": 600,
         "exec": "curl -s \"wttr.in/${WTTR_LOCATION}?format=+%t+%c\"",
-        "return-type": "text"
-    },
-        "custom/songrec": {
+        "return-type": "text",
+        "on-click": "$TERMINAL --title weather -e bash -c 'curl wttr.in/${WTTR_LOCATION}; echo; exec bash'"
+    }, 
+    "custom/songrec": {
         "format": "", // Hier kannst du dein Glyph einfügen (z.B. von FontAwesome oder Nerd Fonts)
         "tooltip": false,
         "on-click": "songrec"

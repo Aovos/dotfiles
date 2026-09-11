@@ -111,3 +111,12 @@ hl.window_rule({
   center = true,
   size  = { 1400, 900 },
 })
+
+-- Weather popup
+hl.window_rule({
+  name   = "weather-popup",
+  match  = { class = "Alacritty", title = "weather" },
+  float  = true,
+  center = true,
+  size   = { 1400, 900 },
+})

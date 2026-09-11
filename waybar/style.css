@@ -232,6 +232,17 @@ window#waybar {
 /* ==========================================================================
    HOVER EFFEKTE (INTERAKTIVE MODULE)
    ========================================================================== */
+
+#clock:hover {
+    background-color: @color_clock;
+    color: @bg_bar;
+}
+
+#custom-weather:hover {
+    background-color: @color_weather;
+    color: @bg_bar;
+}
+
 #custom-songrec:hover {
     background-color: @color_songrec;
     color: @bg_bar;
