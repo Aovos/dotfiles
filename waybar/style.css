@@ -19,6 +19,8 @@
 /* Soft-Blau */
 @define-color color_songrec #f48fb1;
 /* Soft-Pink */
+@define-color color_mpris #43a047;
+/* Tiefes Grün für MPRIS */
 @define-color color_cava #81c784;
 /* Soft-Grün */
 @define-color color_hardware #e0e0e0;
@@ -61,6 +63,7 @@ window#waybar {
 #custom-moonphase,
 #custom-weather,
 #custom-songrec,
+#mpris,
 #cava,
 #cpu,
 #temperature,
@@ -114,6 +117,17 @@ window#waybar {
 
 #custom-songrec:hover {
     background-color: @color_songrec;
+    color: @bg_bar;
+}
+
+#mpris {
+    color: @color_mpris;
+    padding: 2px 12px;
+    margin-left: 3px;
+}
+
+#mpris:hover {
+    background-color: @color_mpris;
     color: @bg_bar;
 }
 
