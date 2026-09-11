@@ -221,7 +221,9 @@
         "format": "{icon}",
         "tooltip": true,
         "tooltip-format": "{percent}%",
-        "scroll-step": 5,
+        "scroll-step": 2,
+        "reverse-scrolling": true,
+        "reverse-mouse-scrolling": false,
         "format-icons": [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
     },
     "network": {
