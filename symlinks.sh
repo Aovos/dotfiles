@@ -29,3 +29,6 @@ ln -s ~/Git/dotfiles/Scripts ~/Scripts
 
 # --- WAYBAR ---
 ln -s ~/Git/dotfiles/waybar ~/.config/waybar
+
+# --- QUICKSHELL ---
+ln -s ~/Git/dotfiles/quickshell ~/.config/quickshell
