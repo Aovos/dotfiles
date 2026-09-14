@@ -336,6 +336,7 @@
     # 🖼️ Grafik & Design
     inkscape
     gimp
+    rawtherapee
     feh
 
     # 📸 Screenshots
@@ -370,6 +371,7 @@
     hypridle
 
     # 🖥️ Desktop UI
+    quickshell
     rofi
     rofimoji
     dunst
