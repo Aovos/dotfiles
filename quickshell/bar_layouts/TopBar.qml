@@ -1,5 +1,7 @@
 import QtQuick
+
 import "../modules/clock"
+import "../modules/cava"
 import "../modules/workspaces"
 
 Rectangle {
@@ -34,23 +36,26 @@ Rectangle {
         Clock {
             anchors.centerIn: parent
         }
-
     }
 
     Rectangle {
         id: cavaArea
 
-         width: 120
-         height: 30
+        width: 120
+        height: 30
 
         radius: 15
 
-         color: "#202020"
+        color: "#202020"
 
         anchors {
             left: clockArea.right
             leftMargin: 8
             verticalCenter: parent.verticalCenter
+        }
+
+        Cava {
+            anchors.centerIn: parent
         }
     }
 

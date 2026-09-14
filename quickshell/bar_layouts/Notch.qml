@@ -1,14 +1,17 @@
 import QtQuick
 import QtQuick.Effects
 
-Rectangle {
-    id: notch
+import "../modules/clock"
 
-    width: timeText.implicitWidth + 40
-    height: 30
+Rectangle {
+    id: root
+
+    width: clockArea.width + 20
+    height: 40
+
+    radius: 20
 
     color: "#000000"
-    radius: 20
 
     border.color: "#1a1a1a"
     border.width: 1
@@ -22,28 +25,20 @@ Rectangle {
         shadowVerticalOffset: 3
     }
 
-    Text {
-        id: timeText
+    Rectangle {
+        id: clockArea
+
+        width: 100
+        height: 30
+
+        radius: 15
+
+        color: "#202020"
 
         anchors.centerIn: parent
 
-        color: "#ffffff"
-        font.pixelSize: 16
-        font.weight: Font.DemiBold
-        font.family: "Monospace"
-
-        function updateTime() {
-            text = Qt.formatTime(new Date(), "hh:mm")
+        Clock {
+            anchors.centerIn: parent
         }
-
-        Timer {
-            interval: 60000
-            running: true
-            repeat: true
-
-            onTriggered: timeText.updateTime()
-        }
-
-        Component.onCompleted: updateTime()
     }
 }

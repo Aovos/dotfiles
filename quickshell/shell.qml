@@ -13,28 +13,29 @@ PanelWindow {
         right: true
     }
 
-    implicitHeight: 60
+    implicitHeight: 50
 
-    exclusionMode: ExclusionMode.Ignore
+    exclusionMode: ExclusionMode.Auto
 
-    WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
     focusable: false
     color: "transparent"
+    
+    // Notch {
+    //     anchors {
+    //         horizontalCenter: parent.horizontalCenter
+    //         top: parent.top
+    //         topMargin: 5
+    //     }
+    // }
 
     TopBar {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            topMargin: 10
+            topMargin: 5
         }
     }
-
-    // mask: Region {
-    //     x: notch.x
-    //     y: notch.y
-    //     width: notch.width
-    //     height: notch.height
-    // }
 }
