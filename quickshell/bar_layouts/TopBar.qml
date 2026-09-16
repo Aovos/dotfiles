@@ -4,6 +4,7 @@ import "../modules/clock"
 import "../modules/cava"
 import "../modules/workspaces"
 import "../modules/battery"
+import "../modules/powerprofile"
 
 Rectangle {
     id: root
@@ -83,8 +84,15 @@ Rectangle {
             verticalCenter: parent.verticalCenter
         }
 
-        Battery {
+        Row {
             anchors.centerIn: parent
+
+            spacing: 8
+
+            PowerProfile { }
+
+            Battery { }
         }
     }
+
 }
