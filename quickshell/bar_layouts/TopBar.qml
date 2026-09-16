@@ -7,6 +7,7 @@ import "../modules/battery"
 import "../modules/powerprofile"
 import "../modules/sound"
 import "../modules/wifi"
+import "../modules/bluetooth"
 
 Rectangle {
     id: root
@@ -94,6 +95,8 @@ Rectangle {
             Wifi { }
 
             PowerProfile { }
+
+            Bluetooth { }
 
             Sound { }
 
