@@ -8,6 +8,8 @@ import "../modules/powerprofile"
 import "../modules/sound"
 import "../modules/wifi"
 import "../modules/bluetooth"
+import "../modules/powermenu"
+import "../shared"
 
 Rectangle {
     id: root
@@ -71,15 +73,10 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    Row {
         id: statusArea
 
-        width: 180
-        height: 30
-
-        radius: 15
-
-        color: "#202020"
+        spacing: 4
 
         anchors {
             right: parent.right
@@ -87,20 +84,40 @@ Rectangle {
             verticalCenter: parent.verticalCenter
         }
 
-        Row {
-            anchors.centerIn: parent
+        StatusButton {
+            PowerProfile {
+                anchors.centerIn: parent
+            }
+        }
 
-            spacing: 8
+        StatusButton {
+            Sound {
+                anchors.centerIn: parent
+            }
+        }
 
-            Wifi { }
+        StatusButton {
+            Wifi {
+                anchors.centerIn: parent
+            }
+        }
 
-            PowerProfile { }
+        StatusButton {
+            Bluetooth {
+                anchors.centerIn: parent
+            }
+        }
 
-            Bluetooth { }
+        StatusButton {
+            Battery {
+                anchors.centerIn: parent
+            }
+        }
 
-            Sound { }
-
-            Battery { }
+        StatusButton {
+            PowerMenu {
+                anchors.centerIn: parent
+            }
         }
     }
 
