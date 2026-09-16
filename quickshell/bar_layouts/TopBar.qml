@@ -3,6 +3,7 @@ import QtQuick
 import "../modules/clock"
 import "../modules/cava"
 import "../modules/workspaces"
+import "../modules/battery"
 
 Rectangle {
     id: root
@@ -80,6 +81,10 @@ Rectangle {
             right: parent.right
             rightMargin: 8
             verticalCenter: parent.verticalCenter
+        }
+
+        Battery {
+            anchors.centerIn: parent
         }
     }
 }
