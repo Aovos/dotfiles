@@ -49,11 +49,13 @@ Rectangle {
     }
 
     MouseArea {
-        anchors.fill: parent
+    anchors.fill: parent
 
-        hoverEnabled: true
+    hoverEnabled: true
 
-        onEntered: root.hovered = true
-        onExited: root.hovered = false
-    }
+    acceptedButtons: Qt.NoButton
+
+    onEntered: root.hovered = true
+    onExited: root.hovered = false
+} 
 }

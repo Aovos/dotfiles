@@ -14,6 +14,8 @@ import "../shared"
 Rectangle {
     id: root
 
+    signal powerToggled()
+
     width: 900
     height: 40
 
@@ -116,9 +118,14 @@ Rectangle {
 
         StatusButton {
             PowerMenu {
+                id: powerMenu
+
                 anchors.centerIn: parent
+
+                onToggleRequested: {
+                    root.powerToggled()
+                }
             }
         }
     }
-
 }
