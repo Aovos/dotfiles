@@ -6,6 +6,7 @@ import "../modules/workspaces"
 import "../modules/battery"
 import "../modules/powerprofile"
 import "../modules/sound"
+import "../modules/wifi"
 
 Rectangle {
     id: root
@@ -89,6 +90,8 @@ Rectangle {
             anchors.centerIn: parent
 
             spacing: 8
+
+            Wifi { }
 
             PowerProfile { }
 
