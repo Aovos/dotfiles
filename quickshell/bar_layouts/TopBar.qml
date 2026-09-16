@@ -5,6 +5,7 @@ import "../modules/cava"
 import "../modules/workspaces"
 import "../modules/battery"
 import "../modules/powerprofile"
+import "../modules/sound"
 
 Rectangle {
     id: root
@@ -90,6 +91,8 @@ Rectangle {
             spacing: 8
 
             PowerProfile { }
+
+            Sound { }
 
             Battery { }
         }
