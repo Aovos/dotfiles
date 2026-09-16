@@ -14,7 +14,7 @@ Text {
             return "󰤮"
 
         if (!connected)
-            return "󰤯"
+            return "󰤫"
 
         if (signalStrength >= 80)
             return "󰤨"
