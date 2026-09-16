@@ -3,9 +3,14 @@ import Quickshell
 import Quickshell.Wayland
 
 import "bar_layouts"
+import "popups"
 
 PanelWindow {
     id: root
+
+    PowerPopup {
+        id: powerPopup
+    }
 
     anchors {
         top: true
@@ -22,20 +27,18 @@ PanelWindow {
 
     focusable: false
     color: "transparent"
-    
-    // Notch {
-    //     anchors {
-    //         horizontalCenter: parent.horizontalCenter
-    //         top: parent.top
-    //         topMargin: 5
-    //     }
-    // }
 
     TopBar {
+        id: topBar
+
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
             topMargin: 5
+        }
+
+        onPowerToggled: {
+            powerPopup.opened = !powerPopup.opened
         }
     }
 }
