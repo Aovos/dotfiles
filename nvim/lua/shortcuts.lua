@@ -36,6 +36,7 @@ local move_target      = require("scripts.move_target")
 local git_stage        = require("scripts.git_scripts.git_stage")
 local git_commit       = require("scripts.git_scripts.git_commit")
 local git_push         = require("scripts.git_scripts.git_push")
+local git_force_push   = require("scripts.git_scripts.git_force_push")
 local git_pull         = require("scripts.git_scripts.git_pull")
 local git_force_pull = require("scripts.git_scripts.git_force_pull")
 
@@ -66,12 +67,15 @@ wk.add({
   { "<leader>gss", git_stage.stage_current, desc = "Stage Current File" },
   { "<leader>gsS", git_stage.unstage_all,   desc = "Unstage All" },
 
+  { "<leader>gc", git_commit, desc = "Commit" },
+
   { "<leader>gl", group = "Pull..." },
   { "<leader>gll", git_pull,       desc = "Pull" },
   { "<leader>glL", git_force_pull, desc = "Force Pull" },
 
-  { "<leader>gc", git_commit, desc = "Commit" },
-  { "<leader>gp", git_push,   desc = "Push" },
+  { "<leader>gp", group = "Push..." },
+  { "<leader>gpp", git_push,       desc = "Push" },
+  { "<leader>gpP", git_force_push, desc = "Force Push" },
 
   { "<leader>gb", "<cmd>Gitsigns blame<cr>",    desc = "Blame" },
   { "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff" },
