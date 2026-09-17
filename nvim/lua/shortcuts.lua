@@ -67,9 +67,9 @@ wk.add({
   { "<leader>gsS", git_stage.unstage_all,   desc = "Unstage All" },
 
   { "<leader>gc", git_commit, desc = "Commit" },
-  { "<leader>gl", git_pull,   desc = "Pull from GitHub" },
-  { "<leader>gL", git_force_pull, desc = "Force Pull (Überschreiben!)" },
-  { "<leader>gp", git_push,   desc = "Push to GitHub" },
+  { "<leader>gl", git_pull,   desc = "Pull" },
+  { "<leader>gL", git_force_pull, desc = "Force Pull" },
+  { "<leader>gp", git_push,   desc = "Push" },
 
   { "<leader>gb", "<cmd>Gitsigns blame<cr>",    desc = "Blame" },
   { "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff" },
