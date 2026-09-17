@@ -37,6 +37,7 @@ local git_stage        = require("scripts.git_scripts.git_stage")
 local git_commit       = require("scripts.git_scripts.git_commit")
 local git_push         = require("scripts.git_scripts.git_push")
 local git_pull         = require("scripts.git_scripts.git_pull")
+local git_force_pull = require("scripts.git_scripts.git_force_pull")
 
 local cd_path          = require("scripts.cd_path")
 local toggle_comment   = require("scripts.toggle_comment")
@@ -67,6 +68,7 @@ wk.add({
 
   { "<leader>gc", git_commit, desc = "Commit" },
   { "<leader>gl", git_pull,   desc = "Pull from GitHub" },
+  { "<leader>gL", git_force_pull, desc = "Force Pull (Überschreiben!)" },
   { "<leader>gp", git_push,   desc = "Push to GitHub" },
 
   { "<leader>gb", "<cmd>Gitsigns blame<cr>",    desc = "Blame" },
