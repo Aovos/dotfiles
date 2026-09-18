@@ -120,13 +120,3 @@ hl.window_rule({
   center = true,
   size   = { 1400, 900 },
 })
-
--- QuickShell AMOLED Notch als echtes Overlay über alle Fenster zwingen
-hl.window_rule({
-  name       = "quickshell-notch",
-  match      = { class = "quickshell" },
-  float      = true,
-  pin        = true,
-  fullscreen = true,
-})
-
