@@ -1,12 +1,20 @@
 import QtQuick
-import QtQuick.Effects
 
 import "../modules/clock"
+import "../modules/workspaces"
+import "../modules/battery"
+import "../modules/powerprofile"
+import "../modules/sound"
+import "../modules/wifi"
+import "../modules/bluetooth"
+import "../shared"
 
 Rectangle {
     id: root
 
-    width: clockArea.width + 20
+    property bool expanded: true
+
+    width: 900
     height: 40
 
     radius: 20
@@ -16,13 +24,19 @@ Rectangle {
     border.color: "#1a1a1a"
     border.width: 1
 
-    layer.enabled: true
+    anchors.horizontalCenter: parent.horizontalCenter
 
-    layer.effect: MultiEffect {
-        shadowEnabled: true
-        shadowColor: "#aa000000"
-        shadowBlur: 1.0
-        shadowVerticalOffset: 3
+    y: expanded ? 0 : -height
+
+    function toggle() {
+        expanded = !expanded
+    }
+
+    Behavior on y {
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.OutCubic
+        }
     }
 
     Rectangle {
@@ -35,10 +49,63 @@ Rectangle {
 
         color: "#202020"
 
-        anchors.centerIn: parent
+        anchors {
+            left: parent.left
+            leftMargin: 8
+            verticalCenter: parent.verticalCenter
+        }
 
         Clock {
             anchors.centerIn: parent
+        }
+    }
+
+    Workspaces {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
+        }
+    }
+
+    Row {
+        id: statusArea
+
+        spacing: 4
+
+        anchors {
+            right: parent.right
+            rightMargin: 8
+            verticalCenter: parent.verticalCenter
+        }
+
+        StatusButton {
+            PowerProfile {
+                anchors.centerIn: parent
+            }
+        }
+
+        StatusButton {
+            Sound {
+                anchors.centerIn: parent
+            }
+        }
+
+        StatusButton {
+            Wifi {
+                anchors.centerIn: parent
+            }
+        }
+
+        StatusButton {
+            Bluetooth {
+                anchors.centerIn: parent
+            }
+        }
+
+        StatusButton {
+            Battery {
+                anchors.centerIn: parent
+            }
         }
     }
 }

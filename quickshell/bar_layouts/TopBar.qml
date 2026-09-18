@@ -1,20 +1,20 @@
 import QtQuick
 
 import "../modules/clock"
-import "../modules/cava"
 import "../modules/workspaces"
 import "../modules/battery"
 import "../modules/powerprofile"
 import "../modules/sound"
 import "../modules/wifi"
 import "../modules/bluetooth"
-import "../modules/powermenu"
+//import "../modules/power"
 import "../shared"
 
 Rectangle {
     id: root
 
     signal powerToggled()
+    signal wifiToggled()
 
     width: 900
     height: 40
@@ -43,27 +43,6 @@ Rectangle {
         }
 
         Clock {
-            anchors.centerIn: parent
-        }
-    }
-
-    Rectangle {
-        id: cavaArea
-
-        width: 120
-        height: 30
-
-        radius: 15
-
-        color: "#202020"
-
-        anchors {
-            left: clockArea.right
-            leftMargin: 8
-            verticalCenter: parent.verticalCenter
-        }
-
-        Cava {
             anchors.centerIn: parent
         }
     }
@@ -101,6 +80,10 @@ Rectangle {
         StatusButton {
             Wifi {
                 anchors.centerIn: parent
+
+                onToggled: {
+                    root.wifiToggled()
+                }
             }
         }
 
@@ -116,16 +99,16 @@ Rectangle {
             }
         }
 
-        StatusButton {
-            PowerMenu {
-                id: powerMenu
-
-                anchors.centerIn: parent
-
-                onToggleRequested: {
-                    root.powerToggled()
-                }
-            }
-        }
+        // StatusButton {
+        //     Power {
+        //         id: power
+        //
+        //         anchors.centerIn: parent
+        //
+        //         onToggleRequested: {
+        //             root.powerToggled()
+        //         }
+        //     }
+        // }
     }
 }

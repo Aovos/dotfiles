@@ -3,14 +3,9 @@ import Quickshell
 import Quickshell.Wayland
 
 import "bar_layouts"
-import "popups"
 
 PanelWindow {
     id: root
-
-    PowerPopup {
-        id: powerPopup
-    }
 
     anchors {
         top: true
@@ -20,25 +15,24 @@ PanelWindow {
 
     implicitHeight: 50
 
-    exclusionMode: ExclusionMode.Auto
+    WlrLayershell.layer: WlrLayer.Overlay
 
-    WlrLayershell.layer: WlrLayer.Top
+    exclusionMode: ExclusionMode.Ignore
+
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
     focusable: false
     color: "transparent"
 
-    TopBar {
-        id: topBar
+    Notch {
+        id: notch
+    }
 
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 5
-        }
+    Shortcut {
+        sequence: "Meta+I"
 
-        onPowerToggled: {
-            powerPopup.opened = !powerPopup.opened
+        onActivated: {
+            notch.toggle()
         }
     }
 }

@@ -10,7 +10,7 @@ Text {
     text: {
         switch (profile) {
         case "performance":
-            return ""
+            return ""
 
         case "power-saver":
             return ""

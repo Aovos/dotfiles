@@ -23,6 +23,7 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " -e nvim"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(terminal .. " -e sh -c 'cd ~/Git/dotfiles && nvim'"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rofimoji --action type"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("~/Git/dotfiles/Scripts/Powermenu/powermenu.sh"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("quickshell ipc call notch toggle"))
 
 
 -- Floating & Pinning kombiniert auf Taste P

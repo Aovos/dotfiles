@@ -5,6 +5,8 @@ import Quickshell.Io
 Text {
     id: root
 
+    signal toggled ()
+
     property int signalStrength: 0
     property bool connected: false
     property bool wifiEnabled: true
@@ -108,5 +110,14 @@ Text {
     Component.onCompleted: {
         wifiProc.running = true
         wifiRadioProc.running = true
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+
+        onClicked: {
+            root.toggled()
+        }
     }
 }
