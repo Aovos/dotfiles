@@ -293,16 +293,13 @@
     # 🌐 Internet & Kommunikation
     firefox
     chromium
-    freetube
     thunderbird
     signal-desktop
     teams-for-linux
-    syncthing
 
     # 🧠 Produktivität & Wissen
     super-productivity
     anki
-    drawio
 
     # 🧾 Office & Dokumente
     libreoffice
@@ -328,15 +325,12 @@
 
     # 🛠️ Terminal & CLI
     git
-    tmux
-    fzf
     curl
     lazygit
 
     # 🖼️ Grafik & Design
     inkscape
     gimp
-    rawtherapee
     feh
 
     # 📸 Screenshots
@@ -351,6 +345,7 @@
     tenacity
 
     # 🎬 Medien
+    vlc
     mpv
     obs-studio
     shotcut
@@ -371,24 +366,17 @@
     hypridle
 
     # 🖥️ Desktop UI
-    quickshell
     rofi
     rofimoji
     dunst
     libnotify
-    
-    # Taskbar
-    waybar
-    cava
-    wttrbar
 
-    # 📁 Dateimanagement (Beide behalten für maximale Features!)
+    # 📁 Dateimanagement
     nemo
     nautilus
     file-roller
 
     # 📊 Systemmonitoring
-    mission-center
     btop
     brightnessctl
     playerctl

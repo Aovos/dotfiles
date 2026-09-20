@@ -58,15 +58,6 @@ hl.window_rule({
   size  = { 600, 400 },
 })
 
--- Networkmanager
-hl.window_rule({
-  name  = "networkmanager",
-  match = { class = "nm-connection-editor" },
-  float = true,
-  center = true,
-  size  = { 800, 600 },
-})
-
 -- Pavucontrol
 hl.window_rule({
   name  = "pavucontrol-center",
@@ -101,22 +92,4 @@ hl.window_rule({
   float = true,
   center = true,
   size  = { 900, 600 },
-})
-
--- MissionCenter
-hl.window_rule({
-  name  = "missioncenter-center",
-  match = { class = "io.missioncenter.MissionCenter" },
-  float = true,
-  center = true,
-  size  = { 1400, 900 },
-})
-
--- Weather popup
-hl.window_rule({
-  name   = "weather-popup",
-  match  = { class = "Alacritty", title = "weather" },
-  float  = true,
-  center = true,
-  size   = { 1400, 900 },
 })
