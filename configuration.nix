@@ -115,44 +115,6 @@
   };
 
   ####################################################################
-  # GPU - NVIDIA & INTEL HYBRID-SETUP (Fehler bereinigt)
-  ####################################################################
-  # 1. Grafiktreiber für NVIDIA und Intel aktivieren
-  #services.xserver.videoDrivers = [ "nvidia" ];
-
-  # 2. Hardware-Beschleunigung für Intel (UHD 630) und 32-Bit Support
-  #hardware.graphics = {
-  #  enable = true;
-  #  enable32Bit = true;
-  #  extraPackages = with pkgs; [
-  #    intel-media-driver   # Moderner Haupttreiber für Video-Dekodierung (Akkuschonung)
-  #    intel-vaapi-driver   # Klassischer Ersatztreiber (Fallback) für ältere Programme
-  #  ];
-  #};
-  #
-  # 3. NVIDIA Prime Offload (Tiefschlaf-Modus für minimalen Verbrauch)
-  #hardware.nvidia = {
-  #  modesetting.enable = true;
-  #  open = false;           # Erforderlich für stabilen Stromsparmodus der GTX 1660 Ti
-  #  nvidiaSettings = false; # Spart Ressourcen (deaktiviert das Nvidia-Kontrollzentrum im Hintergrund)
-  #
-  #  # Aktiviert die dynamische Energieverwaltung (D3hot/D3cold)
-  #  powerManagement.enable = true;
-  #  powerManagement.finegrained = true;
-  #
-  #  prime = {
-  #    offload = {
-  #      enable = true;
-  #      enableOffloadCmd = true; # Aktiviert den Befehl 'nvidia-offload' im Terminal
-  #    };
-  #
-  #    # Ihre verifizierten PCI-Bus-IDs
-  #    intelBusId = "PCI:0:2:0";
-  #    nvidiaBusId = "PCI:1:0:0";
-  #  };
-  #};
-
-  ####################################################################
   # Sicherheit & Rechteverwaltung
   ####################################################################
   security = {
