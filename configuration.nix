@@ -254,7 +254,6 @@
   environment.systemPackages = with pkgs; [
     # 🌐 Internet & Kommunikation
     firefox
-    chromium
     thunderbird
     signal-desktop
     teams-for-linux
