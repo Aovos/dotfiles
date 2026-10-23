@@ -9,9 +9,8 @@ The core of this environment is powered by **NixOS** and the **Hyprland** dynami
 ## 📋 Table of Contents
 
 - [🛠 Philosophy](#-philosophy)
-- [🎬 Workflow Showcase](#🎬-workflow-showcase)
-- [🎯 Core Tech Stack](#-core-tech-stack)
-- [⚡ Key Features](#-key-features)
+- [🎬 Workflow Showcase](#-workflow-showcase)
+- [⚡ Components & Features](#-components--features)
 - [🚀 Installation & Setup](#-installation--setup)
 
 ## 🛠 Philosophy
@@ -36,35 +35,30 @@ The goal is not only to create an efficient desktop environment, but also to gai
 ![Neovim](assets/screenshot-neovim.png)
 ![Multi-Apps](assets/screenshot_multi_applications.png)
 
-## 🎯 Core Tech Stack
+## ⚡ Components & Features
 
-- **OS:** NixOS (declarative and reproducible system configuration)
-- **WM:** Hyprland (Wayland-based dynamic tiling compositor)
-- **Terminal:** Alacritty (GPU-accelerated terminal emulator)
-- **Editor:** Neovim (Lua-based configuration)
-- **Status Bar:** Waybar (custom modules and CSS styling)
-- **Application Launcher:** Rofi (custom launchers and power menus)
-- **Notifications:** Dunst (lightweight notification daemon)
+This setup combines a collection of tools and customizations designed around a focused, keyboard-driven workflow.
 
----
-
-## ⚡ Key Features
-
-- **Declarative System Management** through NixOS
-- **Automated Dotfile Deployment** using a custom symlink script
-- **Multi-Monitor Hyprland Layouts** optimized for productivity
-- **Custom Waybar Modules**, including:
-  - Weather integration
-  - Calendar preview
-  - Workspace indicators
-  - Backlight controls
-  - System monitoring widgets
-- **Custom Rofi Menus** and power controls
-- **Gaming Support** with Steam and Gamemode integration
-- **Lua-Based Neovim Configuration** tailored to development workflows
-- **Personal Utility Scripts** for automation and desktop integration
-
----
+- **NixOS**
+  Declarative system management, reproducible configurations and centralized package control.
+- **Hyprland**
+  A dynamic Wayland compositor used to build a workspace-driven workflow focused on context switching rather than multi-monitor setups.
+- **Neovim**
+  Lua-based editor configuration tailored for development, navigation and productivity.
+- **Alacritty**
+  Fast GPU-accelerated terminal emulator used as the primary interface for development and system management.
+- **Waybar**
+  Customized status bar featuring weather integration, workspace indicators, calendar previews, brightness controls and system monitoring.
+- **Rofi**
+  Central launcher for applications, scripts, power controls and everyday system interactions.
+- **Dunst**
+  Lightweight notification management that integrates seamlessly into the desktop environment.
+- **Gaming & Performance**
+  Integrated support for Steam, Gamemode and gaming-related system optimizations managed through NixOS.
+- **Automation & Scripting**
+  Custom scripts and deployment tools simplify repetitive tasks and provide additional desktop functionality.
+- **Dotfile Deployment**
+  Automated configuration management through custom symlink tooling for easy setup and maintenance.
 
 ## 🚀 Installation & Setup
 
