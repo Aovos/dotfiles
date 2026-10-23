@@ -33,7 +33,7 @@ The goal is not only to create an efficient desktop environment, but also to gai
 
 ## 🎬 Workflow Showcase
 
-
+![Neovim](assets/screenshot-neovim.png)
 
 ## 🎯 Core Tech Stack
 
