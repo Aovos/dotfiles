@@ -32,7 +32,7 @@ Areas I am currently exploring:
 The goal is not only to create an efficient desktop environment, but also to gain a deeper understanding of the technologies behind it.
 
 ## 🎬 Workflow Showcase
-
+![Monitor](assets/screenshot-monitor.png)
 ![Neovim](assets/screenshot-neovim.png)
 
 ## 🎯 Core Tech Stack
