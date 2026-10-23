@@ -34,6 +34,7 @@ The goal is not only to create an efficient desktop environment, but also to gai
 ## 🎬 Workflow Showcase
 ![Monitor](assets/screenshot-monitor.png)
 ![Neovim](assets/screenshot-neovim.png)
+![Multi-Apps](assets/screenshot_multi_applications.png)
 
 ## 🎯 Core Tech Stack
 
